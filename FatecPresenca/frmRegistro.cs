@@ -19,12 +19,18 @@ namespace FatecPresenca
     public partial class frmRegistro : Form
     {
         bool ligado = true;
-        int idEvento = 0;
+        public int idEvento = 0;
+
+        public event EventHandler? iniciarLeitura;
+        public event EventHandler? fimLeitura;
 
         public frmRegistro(int idEvento)
         {
             InitializeComponent();
             this.idEvento = idEvento;
+
+            btnIniciarIdent.Click += (_, _) => iniciarLeitura?.Invoke(this, EventArgs.Empty);
+            btnPararIdent.Click += (_, _) => fimLeitura?.Invoke(this, EventArgs.Empty);
         }
 
         //private static int? EncontrarAluno(this IEnumerable<int> alunos)
@@ -71,8 +77,8 @@ namespace FatecPresenca
 
                 if (servico.resgitrarPassagem(aluno.getId(), idEvento, TimeOnly.FromDateTime(DateTime.Now)))
                 {
-                    ligado = true;
                     MessageBox.Show("Aluno registrado!");
+                    ligado = true;
                 }
             }
             catch (Exception ex)
@@ -81,18 +87,26 @@ namespace FatecPresenca
             }
         }
 
+        public void HabilitarCancelar(bool habilitado)
+        {
+            if (InvokeRequired)
+                Invoke(() => btnPararIdent.Enabled = habilitado);
+            else
+                btnPararIdent.Enabled = habilitado;
+        }
+
         private void btnIniciarIdent_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Començando a captura", "AVISO", MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-            tmrCaptura.Start();
+            //MessageBox.Show("Començando a captura", "AVISO", MessageBoxButtons.OK,
+            //    MessageBoxIcon.Warning);
+            //tmrCaptura.Start();
         }
 
         private void btnPararIdent_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Parando a captura", "AVISO", MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-            tmrCaptura.Stop();
+            //MessageBox.Show("Parando a captura", "AVISO", MessageBoxButtons.OK,
+            //    MessageBoxIcon.Warning);
+            //tmrCaptura.Stop();
         }
 
         private void tmrCaptura_Tick(object sender, EventArgs e)

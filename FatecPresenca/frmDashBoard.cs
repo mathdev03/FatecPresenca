@@ -1,6 +1,7 @@
 using FatecPresenca.DAO;
 using FatecPresenca.Models;
 using FatecPresenca.Presenca;
+using FatecPresenca.Presenter;
 using System.Diagnostics.Eventing.Reader;
 
 namespace FatecPresenca
@@ -64,8 +65,11 @@ namespace FatecPresenca
                 return;
             }
 
-            frmRegistro registrar = new frmRegistro(evento.Id);
-            registrar.ShowDialog();
+
+
+            frmRegistro dialog = new frmRegistro(evento.Id);
+            var presenter = new RegistroPresenter(dialog);
+            dialog.ShowDialog();
         }
         private void btnSair_Click(object sender, EventArgs e)
         {

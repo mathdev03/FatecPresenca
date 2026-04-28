@@ -41,51 +41,51 @@ namespace FatecPresenca
         //    return groups.Length == 0 ? null : groups.MaxBy(g => g.Count())?.Key;
         //}
 
-        private async void identificarAluno()
-        {
-            try
-            {
-                Captura captura = new Captura();
-                TemplateBD bdtemp = new TemplateBD();
+        //private async void identificarAluno()
+        //{
+        //    try
+        //    {
+        //        Captura captura = new Captura();
+        //        TemplateBD bdtemp = new TemplateBD();
 
-                var d = bdtemp.carregarTemplates();
+        //        var d = bdtemp.carregarTemplates();
 
-                if (d == null) return;
+        //        if (d == null) return;
 
-                var templates = captura.identificar(d);
-                var alunos = new List<int>();
+        //        var templates = captura.identificar(d);
+        //        var alunos = new List<int>();
 
-                templates.ForEach(x =>
-                {
-                    alunos.Add(x.getIdUser());
-                });
+        //        templates.ForEach(x =>
+        //        {
+        //            alunos.Add(x.getIdUser());
+        //        });
 
-                var group = alunos.GroupBy(x => x).ToArray();
+        //        var group = alunos.GroupBy(x => x).ToArray();
 
-                var alunoIdent = group.Length == 0 ? null : group.MaxBy(g => g.Count())?.Key;
-                int id = Convert.ToInt32(alunoIdent);
+        //        var alunoIdent = group.Length == 0 ? null : group.MaxBy(g => g.Count())?.Key;
+        //        int id = Convert.ToInt32(alunoIdent);
 
-                if (id <= 0) return;
+        //        if (id <= 0) return;
 
-                AlunoBD bd = new AlunoBD();
+        //        AlunoBD bd = new AlunoBD();
 
-                var aluno = await bd.buscarAluno(id);
+        //        var aluno = await bd.buscarAluno(id);
 
-                MessageBox.Show($"Aluno identificado: {aluno.getNome()}");
+        //        MessageBox.Show($"Aluno identificado: {aluno.getNome()}");
 
-                var servico = new ServicoRegistro();
+        //        var servico = new ServicoRegistro();
 
-                if (servico.resgitrarPassagem(aluno.getId(), idEvento, TimeOnly.FromDateTime(DateTime.Now)))
-                {
-                    MessageBox.Show("Aluno registrado!");
-                    ligado = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
+        //        if (servico.resgitrarPassagem(aluno.getId(), idEvento, TimeOnly.FromDateTime(DateTime.Now)))
+        //        {
+        //            MessageBox.Show("Aluno registrado!");
+        //            ligado = true;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message);
+        //    }
+        //}
 
         public void HabilitarCancelar(bool habilitado)
         {
@@ -115,7 +115,7 @@ namespace FatecPresenca
             if (ligado)
             {
                 ligado = false;
-                identificarAluno();
+                //identificarAluno();
             }
         }
 

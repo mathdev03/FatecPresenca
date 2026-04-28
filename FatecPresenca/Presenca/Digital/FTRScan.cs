@@ -177,6 +177,42 @@ namespace FatecPresenca.Presenca
             }
         }
 
+        private async Task fingerPresentFrameAsync(CancellationTokenSource cancelation = default)
+        {
+            FrameParameters frame = new FrameParameters();
+            bool fingerDetect = false;
+
+            while (true)
+            {
+                await Task.Delay(1000);
+                cancelation.Token.ThrowIfCancellationRequested();
+
+                // Presença de dedo
+                bool capturarDedo = ftrScanIsFingerPresent(handle, out frame) != 0;
+
+                if (capturarDedo)
+                {
+                    // Colocando o finger
+                    if (!fingerDetect)
+                    {
+                        Console.WriteLine("Dedo detectado! Agora é ajustar....");
+                        fingerDetect = true;
+                    }
+
+                    takeImage(ref frame);
+                    if (frame.Dose > 0) return;
+                }
+                else
+                {
+                    if (fingerDetect)
+                    {
+                        Console.WriteLine("Dedo retirado coloque no lugar!");
+                        fingerDetect = false;
+                    }
+                }
+            }
+        }
+
         private void quality(byte[] b, ImageSize img, int chosedFinger)
         {
             Marshal.Copy(buffer, b, 0, b.Length);
@@ -316,9 +352,11 @@ namespace FatecPresenca.Presenca
             return retorno;
         }
 
-        public bool takeBiometricIdentify()
+        public async Task<bool> takeBiometricIdentify(CancellationTokenSource cancelation = default)
         {
             if (handle == IntPtr.Zero) return false;
+
+            bool cancel = false;
 
             ImageSize img = new ImageSize();
             img = takeSizeImage(img);
@@ -334,12 +372,16 @@ namespace FatecPresenca.Presenca
                 buffer = allocB.AddrOfPinnedObject();
                 template = allocT.AddrOfPinnedObject();
 
-                fingerPresentFrame();
+                await fingerPresentFrameAsync(cancelation);
 
                 byte finger = FINGER_POSITION_UNKNOWN;
 
                 bool takeTemplate = ftrAnsiSdkCreateTemplateFromBuffer(handle, finger, buffer, img.Width, img.Height, template, ref templateSize);
                 if (!takeTemplate) throw new Exception("Dados/Função de criação de template não feita!");
+            }
+            catch (OperationCanceledException)
+            {
+                cancel = true;
             }
             catch (Exception ex)
             {
@@ -351,6 +393,9 @@ namespace FatecPresenca.Presenca
                 allocB.Free();
                 allocT.Free();
             }
+
+            if (cancel)
+                cancelation.Token.ThrowIfCancellationRequested();
 
             return true;
         }

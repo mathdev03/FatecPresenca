@@ -117,7 +117,7 @@ namespace FatecPresenca.Models
             return !(uns > zeros);
         }
 
-        public List<Template> identificar(List<Template> templates)
+        public async Task<List<Template>> identificar(List<Template> templates, CancellationTokenSource c = default)
         {
             List<Template> temps = new List<Template>();
             dispositivo = new FTRScan();
@@ -127,7 +127,7 @@ namespace FatecPresenca.Models
             MessageBox.Show("Identificando!");
 
 
-            if (dispositivo.takeBiometricIdentify())
+            if (await dispositivo.takeBiometricIdentify(c))
             {
                 foreach (var t in templates)
                 {

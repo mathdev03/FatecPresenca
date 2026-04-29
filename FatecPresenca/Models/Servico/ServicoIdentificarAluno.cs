@@ -33,6 +33,9 @@ namespace FatecPresenca.Models.Servico
 
             digitaisCapturados = await captura.identificar(d, cancelar);
 
+            if (digitaisCapturados == null)
+                throw new Exception();
+
             cancelar.Token.ThrowIfCancellationRequested();
 
             //List<Template> templates = await captura.identificar(d);

@@ -10,21 +10,33 @@ using System.Threading.Tasks;
 
 namespace FatecPresenca.Presenter
 {
+    public class RegistroDTO
+    {
+        public string nome { set; get; } = string.Empty;
+        public string entrada { get; set; } = string.Empty;
+        public string saida { set; get; } = string.Empty;
+    }
+
     internal class RegistroPresenter
     {
         private readonly frmRegistro _view;
-        private readonly ServicoRegistro _modelRegistro;
-        private readonly ServicoIdentificarAluno _modelAluno;
+        private readonly ServicoRegistro _serviceRegistro;
+        private readonly ServicoIdentificarAluno _serviceIdentificarAluno;
+        private readonly ServicoAluno _serviceAluno;
         private CancellationTokenSource? _cts;
 
-        public RegistroPresenter(frmRegistro view, ServicoRegistro registro, ServicoIdentificarAluno aluno)
+        public RegistroPresenter(frmRegistro view, ServicoRegistro registro, ServicoIdentificarAluno ident,
+            ServicoAluno aluno)
         {
             _view = view;
-            _modelRegistro = registro;
-            _modelAluno = aluno;
+            _serviceRegistro = registro;
+            _serviceIdentificarAluno = ident;
+            _serviceAluno = aluno;
 
+            _view.carregarLista += async (_, _) => await carregarJanela();
             _view.iniciarLeitura += async (_, _) => await initAsync();
             _view.fimLeitura += (_, _) => Cancelar();
+            _view.fecharJanela += (_, _) => FecharJanela();
         }
 
 
@@ -42,71 +54,46 @@ namespace FatecPresenca.Presenter
             {
                 while (true)
                 {
-                    var aluno = await _modelAluno.identificarAluno(_cts);
+                    var aluno = await _serviceIdentificarAluno.identificarAluno(_cts);
 
                     _cts.Token.ThrowIfCancellationRequested();
 
-                    _modelRegistro.resgitrarPassagem(aluno.getId(), _view.idEvento, TimeOnly.FromDateTime(DateTime.Now));
+                    bool registro = _serviceRegistro.resgitrarPassagem(aluno.getId(), _view.idEvento, TimeOnly.FromDateTime(DateTime.Now));
+                    await carregarJanela();
                 }
 
-            }catch (OperationCanceledException)
+            }
+            catch (OperationCanceledException)
             {
                 MessageBox.Show("Fechando o registro", "AVISO", MessageBoxButtons.OK,
-    MessageBoxIcon.Information);
+                    MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message);    
             }
         }
 
         private void Cancelar() => _cts?.Cancel();
 
+        private async Task carregarJanela()
+        {
+            var presenca = _serviceRegistro.todosRegistros(_view.idEvento);
 
-        // TESTE
+            // Pegar nome dos alunos presente.
+            var ids = presenca.Select(p => p.AlunoId).Distinct().ToList();
+            var nomesMap = await _serviceAluno.alunosPorId(ids);
 
-        //private async void identificacao()
-        //{
-        //    try
-        //    {
-        //        Captura captura = new Captura();
-        //        TemplateBD bdtemp = new TemplateBD();
+            var lista = presenca.Select(p => new RegistroDTO
+            {
+                nome = nomesMap.GetValueOrDefault(p.AlunoId, "Aluno não encontrado"),
+                entrada = p.HorarioEntrada.ToString(),
+                saida = p.HorarioSaida.ToString()
+            }).ToList();
 
-        //        var d = bdtemp.carregarTemplates();
+            _view.AtualizarTabela(lista);
+        }
 
-        //        if (d == null) return;
-
-        //        var templates = captura.identificar(d);
-        //        var alunos = new List<int>();
-
-        //        templates.ForEach(x =>
-        //        {
-        //            alunos.Add(x.getIdUser());
-        //        });
-
-        //        var group = alunos.GroupBy(x => x).ToArray();
-
-        //        var alunoIdent = group.Length == 0 ? null : group.MaxBy(g => g.Count())?.Key;
-        //        int id = Convert.ToInt32(alunoIdent);
-
-        //        if (id <= 0) return;
-
-        //        AlunoBD bd = new AlunoBD();
-
-        //        var aluno = await bd.buscarAluno(id);
-
-        //        MessageBox.Show($"Aluno identificado: {aluno.getNome()}");
-        //        var servico = new ServicoRegistro();
-
-        //        if (servico.resgitrarPassagem(aluno.getId(), _view.idEvento, TimeOnly.FromDateTime(DateTime.Now)))
-        //        {
-        //            MessageBox.Show("Aluno registrado!");
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //}
+        private void FecharJanela() => _view.Close();
     }
 }

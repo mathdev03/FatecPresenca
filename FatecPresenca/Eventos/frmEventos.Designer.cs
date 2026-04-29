@@ -128,6 +128,7 @@
             dgvDadosRegistro.Location = new Point(12, 229);
             dgvDadosRegistro.Name = "dgvDadosRegistro";
             dgvDadosRegistro.ReadOnly = true;
+            dgvDadosRegistro.RowHeadersVisible = false;
             dgvDadosRegistro.RowHeadersWidth = 52;
             dgvDadosRegistro.Size = new Size(877, 299);
             dgvDadosRegistro.TabIndex = 15;

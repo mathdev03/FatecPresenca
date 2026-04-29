@@ -1,6 +1,7 @@
 ﻿using FatecPresenca.DAO;
 using FatecPresenca.Models;
 using FatecPresenca.Models.Servico;
+using FatecPresenca.Presenter;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,74 +19,24 @@ namespace FatecPresenca
 {
     public partial class frmRegistro : Form
     {
-        bool ligado = true;
         public int idEvento = 0;
 
+        public event EventHandler? carregarLista;
         public event EventHandler? iniciarLeitura;
         public event EventHandler? fimLeitura;
+        public event EventHandler? fecharJanela;
 
         public frmRegistro(int idEvento)
         {
             InitializeComponent();
+            dgvDadosRegistro.Columns.Clear();
             this.idEvento = idEvento;
+            this.Load += (_, _) => carregarLista?.Invoke(this, EventArgs.Empty);
 
             btnIniciarIdent.Click += (_, _) => iniciarLeitura?.Invoke(this, EventArgs.Empty);
             btnPararIdent.Click += (_, _) => fimLeitura?.Invoke(this, EventArgs.Empty);
+            btnConcluir.Click += (_, _) => fecharJanela?.Invoke(this, EventArgs.Empty);
         }
-
-        //private static int? EncontrarAluno(this IEnumerable<int> alunos)
-        //{
-        //    if (alunos == null) throw new ArgumentNullException(nameof(alunos));
-
-        //    var groups = alunos.GroupBy(x => x).ToArray();
-        //    return groups.Length == 0 ? null : groups.MaxBy(g => g.Count())?.Key;
-        //}
-
-        //private async void identificarAluno()
-        //{
-        //    try
-        //    {
-        //        Captura captura = new Captura();
-        //        TemplateBD bdtemp = new TemplateBD();
-
-        //        var d = bdtemp.carregarTemplates();
-
-        //        if (d == null) return;
-
-        //        var templates = captura.identificar(d);
-        //        var alunos = new List<int>();
-
-        //        templates.ForEach(x =>
-        //        {
-        //            alunos.Add(x.getIdUser());
-        //        });
-
-        //        var group = alunos.GroupBy(x => x).ToArray();
-
-        //        var alunoIdent = group.Length == 0 ? null : group.MaxBy(g => g.Count())?.Key;
-        //        int id = Convert.ToInt32(alunoIdent);
-
-        //        if (id <= 0) return;
-
-        //        AlunoBD bd = new AlunoBD();
-
-        //        var aluno = await bd.buscarAluno(id);
-
-        //        MessageBox.Show($"Aluno identificado: {aluno.getNome()}");
-
-        //        var servico = new ServicoRegistro();
-
-        //        if (servico.resgitrarPassagem(aluno.getId(), idEvento, TimeOnly.FromDateTime(DateTime.Now)))
-        //        {
-        //            MessageBox.Show("Aluno registrado!");
-        //            ligado = true;
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //}
 
         public void HabilitarCancelar(bool habilitado)
         {
@@ -95,33 +46,10 @@ namespace FatecPresenca
                 btnPararIdent.Enabled = habilitado;
         }
 
-        private void btnIniciarIdent_Click(object sender, EventArgs e)
+        public void AtualizarTabela(IEnumerable<RegistroDTO> dados)
         {
-            //MessageBox.Show("Començando a captura", "AVISO", MessageBoxButtons.OK,
-            //    MessageBoxIcon.Warning);
-            //tmrCaptura.Start();
-        }
-
-        private void btnPararIdent_Click(object sender, EventArgs e)
-        {
-            //MessageBox.Show("Parando a captura", "AVISO", MessageBoxButtons.OK,
-            //    MessageBoxIcon.Warning);
-            //tmrCaptura.Stop();
-        }
-
-        private void tmrCaptura_Tick(object sender, EventArgs e)
-        {
-
-            if (ligado)
-            {
-                ligado = false;
-                //identificarAluno();
-            }
-        }
-
-        private void btnConcluir_Click(object sender, EventArgs e)
-        {
-            this.Close();
+            dgvDadosRegistro.DataSource = null;
+            dgvDadosRegistro.DataSource = dados;
         }
     }
 }

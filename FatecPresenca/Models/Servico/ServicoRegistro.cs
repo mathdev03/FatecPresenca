@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace FatecPresenca.Models.Servico
 {
+
     internal class ServicoRegistro
     {
         private readonly RegistroAlunoBD registroBD;
@@ -59,6 +60,16 @@ namespace FatecPresenca.Models.Servico
             }
 
             return false;
+        }
+
+        public List<RegistroPresenca> todosRegistros(int eventoId)
+        {
+            var registros = registroBD.buscarRegistrosPorEvento(eventoId);
+
+            if(registros.Count == 0)
+                MessageBox.Show("Nenhum registro no evento!"); 
+
+            return registros;
         }
     }
 }

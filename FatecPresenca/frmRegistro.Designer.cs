@@ -28,26 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             pictureBox1 = new PictureBox();
             dgvDadosRegistro = new DataGridView();
-            clmName = new DataGridViewTextBoxColumn();
-            clmSemestre = new DataGridViewTextBoxColumn();
-            clmHorarioEntrada = new DataGridViewTextBoxColumn();
-            clmHorarioSaida = new DataGridViewTextBoxColumn();
             lblStatusDigital = new Label();
             btnIniciarIdent = new Button();
             btnPararIdent = new Button();
             panel1 = new Panel();
-            lblSemestreAluno = new Label();
-            label5 = new Label();
             lblNomeAluno = new Label();
             label3 = new Label();
             label1 = new Label();
             btnConcluir = new Button();
             btnManual = new Button();
-            tmrCaptura = new System.Windows.Forms.Timer(components);
+            clmName = new DataGridViewTextBoxColumn();
+            clmHorarioEntrada = new DataGridViewTextBoxColumn();
+            clmHorarioSaida = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvDadosRegistro).BeginInit();
             panel1.SuspendLayout();
@@ -56,7 +51,7 @@
             // pictureBox1
             // 
             pictureBox1.BackColor = Color.White;
-            pictureBox1.Location = new Point(111, 12);
+            pictureBox1.Location = new Point(121, 12);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(255, 279);
             pictureBox1.TabIndex = 0;
@@ -68,6 +63,7 @@
             dgvDadosRegistro.AllowUserToDeleteRows = false;
             dgvDadosRegistro.AllowUserToResizeColumns = false;
             dgvDadosRegistro.AllowUserToResizeRows = false;
+            dgvDadosRegistro.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             dgvDadosRegistro.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = SystemColors.Control;
@@ -78,51 +74,20 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dgvDadosRegistro.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvDadosRegistro.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvDadosRegistro.Columns.AddRange(new DataGridViewColumn[] { clmName, clmSemestre, clmHorarioEntrada, clmHorarioSaida });
+            dgvDadosRegistro.Columns.AddRange(new DataGridViewColumn[] { clmName, clmHorarioEntrada, clmHorarioSaida });
             dgvDadosRegistro.Location = new Point(673, 12);
             dgvDadosRegistro.Name = "dgvDadosRegistro";
             dgvDadosRegistro.ReadOnly = true;
+            dgvDadosRegistro.RowHeadersVisible = false;
             dgvDadosRegistro.RowHeadersWidth = 52;
             dgvDadosRegistro.Size = new Size(644, 591);
             dgvDadosRegistro.TabIndex = 11;
-            // 
-            // clmName
-            // 
-            clmName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            clmName.HeaderText = "Nome";
-            clmName.MinimumWidth = 6;
-            clmName.Name = "clmName";
-            clmName.ReadOnly = true;
-            // 
-            // clmSemestre
-            // 
-            clmSemestre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            clmSemestre.HeaderText = "Semestre";
-            clmSemestre.MinimumWidth = 6;
-            clmSemestre.Name = "clmSemestre";
-            clmSemestre.ReadOnly = true;
-            // 
-            // clmHorarioEntrada
-            // 
-            clmHorarioEntrada.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            clmHorarioEntrada.HeaderText = "Entrada";
-            clmHorarioEntrada.MinimumWidth = 6;
-            clmHorarioEntrada.Name = "clmHorarioEntrada";
-            clmHorarioEntrada.ReadOnly = true;
-            // 
-            // clmHorarioSaida
-            // 
-            clmHorarioSaida.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            clmHorarioSaida.HeaderText = "Saída";
-            clmHorarioSaida.MinimumWidth = 6;
-            clmHorarioSaida.Name = "clmHorarioSaida";
-            clmHorarioSaida.ReadOnly = true;
             // 
             // lblStatusDigital
             // 
             lblStatusDigital.Font = new Font("Segoe UI Black", 17F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblStatusDigital.ForeColor = Color.White;
-            lblStatusDigital.Location = new Point(12, 294);
+            lblStatusDigital.Location = new Point(22, 294);
             lblStatusDigital.Name = "lblStatusDigital";
             lblStatusDigital.Size = new Size(442, 46);
             lblStatusDigital.TabIndex = 12;
@@ -143,7 +108,6 @@
             btnIniciarIdent.TabIndex = 41;
             btnIniciarIdent.Text = "Iniciar Identificação";
             btnIniciarIdent.UseVisualStyleBackColor = false;
-            btnIniciarIdent.Click += btnIniciarIdent_Click;
             // 
             // btnPararIdent
             // 
@@ -159,13 +123,10 @@
             btnPararIdent.TabIndex = 42;
             btnPararIdent.Text = "Parar Identificação";
             btnPararIdent.UseVisualStyleBackColor = false;
-            btnPararIdent.Click += btnPararIdent_Click;
             // 
             // panel1
             // 
             panel1.BackColor = Color.White;
-            panel1.Controls.Add(lblSemestreAluno);
-            panel1.Controls.Add(label5);
             panel1.Controls.Add(lblNomeAluno);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(label1);
@@ -174,55 +135,32 @@
             panel1.Size = new Size(613, 199);
             panel1.TabIndex = 43;
             // 
-            // lblSemestreAluno
-            // 
-            lblSemestreAluno.AutoSize = true;
-            lblSemestreAluno.Font = new Font("Segoe UI Black", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblSemestreAluno.ForeColor = Color.Black;
-            lblSemestreAluno.Location = new Point(130, 156);
-            lblSemestreAluno.Name = "lblSemestreAluno";
-            lblSemestreAluno.Size = new Size(131, 25);
-            lblSemestreAluno.TabIndex = 48;
-            lblSemestreAluno.Text = "5° SEMESTRE";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI Black", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.ForeColor = Color.Black;
-            label5.Location = new Point(19, 156);
-            label5.Name = "label5";
-            label5.Size = new Size(105, 25);
-            label5.TabIndex = 47;
-            label5.Text = "Semestre:";
-            // 
             // lblNomeAluno
             // 
-            lblNomeAluno.AutoSize = true;
-            lblNomeAluno.Font = new Font("Segoe UI Black", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblNomeAluno.Font = new Font("Segoe UI Black", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblNomeAluno.ForeColor = Color.Black;
-            lblNomeAluno.Location = new Point(99, 114);
+            lblNomeAluno.Location = new Point(102, 100);
             lblNomeAluno.Name = "lblNomeAluno";
-            lblNomeAluno.Size = new Size(270, 25);
+            lblNomeAluno.Size = new Size(508, 95);
             lblNomeAluno.TabIndex = 46;
-            lblNomeAluno.Text = "MATHEUS YUJI SETOGUCHI";
+            lblNomeAluno.Text = "ALUNO";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI Black", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.Font = new Font("Segoe UI Black", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.Black;
-            label3.Location = new Point(19, 114);
+            label3.Location = new Point(3, 101);
             label3.Name = "label3";
-            label3.Size = new Size(74, 25);
+            label3.Size = new Size(101, 35);
             label3.TabIndex = 45;
-            label3.Text = "Nome:";
+            label3.Text = "NOME:";
             // 
             // label1
             // 
             label1.Font = new Font("Segoe UI Black", 17F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.Green;
-            label1.Location = new Point(19, 17);
+            label1.Location = new Point(10, 18);
             label1.Name = "label1";
             label1.Size = new Size(451, 46);
             label1.TabIndex = 44;
@@ -243,7 +181,6 @@
             btnConcluir.TabIndex = 44;
             btnConcluir.Text = "Concluir";
             btnConcluir.UseVisualStyleBackColor = false;
-            btnConcluir.Click += btnConcluir_Click;
             // 
             // btnManual
             // 
@@ -260,10 +197,29 @@
             btnManual.Text = "Manual";
             btnManual.UseVisualStyleBackColor = false;
             // 
-            // tmrCaptura
+            // clmName
             // 
-            tmrCaptura.Interval = 1000;
-            tmrCaptura.Tick += tmrCaptura_Tick;
+            clmName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            clmName.HeaderText = "Nome";
+            clmName.MinimumWidth = 6;
+            clmName.Name = "clmName";
+            clmName.ReadOnly = true;
+            // 
+            // clmHorarioEntrada
+            // 
+            clmHorarioEntrada.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            clmHorarioEntrada.HeaderText = "Entrada";
+            clmHorarioEntrada.MinimumWidth = 6;
+            clmHorarioEntrada.Name = "clmHorarioEntrada";
+            clmHorarioEntrada.ReadOnly = true;
+            // 
+            // clmHorarioSaida
+            // 
+            clmHorarioSaida.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            clmHorarioSaida.HeaderText = "Saída";
+            clmHorarioSaida.MinimumWidth = 6;
+            clmHorarioSaida.Name = "clmHorarioSaida";
+            clmHorarioSaida.ReadOnly = true;
             // 
             // frmRegistro
             // 
@@ -295,21 +251,17 @@
 
         private PictureBox pictureBox1;
         private DataGridView dgvDadosRegistro;
-        private DataGridViewTextBoxColumn clmName;
-        private DataGridViewTextBoxColumn clmSemestre;
-        private DataGridViewTextBoxColumn clmHorarioEntrada;
-        private DataGridViewTextBoxColumn clmHorarioSaida;
         private Label lblStatusDigital;
         private Button btnIniciarIdent;
         private Button btnPararIdent;
         private Panel panel1;
         private Label label1;
-        private Label lblSemestreAluno;
-        private Label label5;
         private Label lblNomeAluno;
         private Label label3;
         private Button btnConcluir;
         private Button btnManual;
-        private System.Windows.Forms.Timer tmrCaptura;
+        private DataGridViewTextBoxColumn clmName;
+        private DataGridViewTextBoxColumn clmHorarioEntrada;
+        private DataGridViewTextBoxColumn clmHorarioSaida;
     }
 }

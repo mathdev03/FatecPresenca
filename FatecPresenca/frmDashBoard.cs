@@ -70,8 +70,10 @@ namespace FatecPresenca
 
             frmRegistro dialog = new frmRegistro(evento.Id);
             ServicoRegistro registro = new ServicoRegistro();
-            ServicoIdentificarAluno aluno = new ServicoIdentificarAluno();
-            var presenter = new RegistroPresenter(dialog, registro, aluno);
+            ServicoIdentificarAluno alunoIdent = new ServicoIdentificarAluno();
+            ServicoAluno aluno = new ServicoAluno();
+
+            var presenter = new RegistroPresenter(dialog, registro, alunoIdent, aluno);
             dialog.ShowDialog();
         }
         private void btnSair_Click(object sender, EventArgs e)

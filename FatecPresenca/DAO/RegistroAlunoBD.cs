@@ -86,6 +86,43 @@ namespace FatecPresenca.DAO
             return true;
         }
 
+        public List<RegistroPresenca> buscarRegistrosPorEvento(int eventoid)
+        {
+            List<RegistroPresenca> alunos = new List<RegistroPresenca>();
+
+            try
+            {
+
+                using (var conn = _db.getConexao())
+                {
+                    var query = @"
+                    SELECT * FROM registropresenca
+                    WHERE RP_EventoID = @evento
+                    ";
+
+                    conn.Open();
+
+                    using (var comand = new MySqlCommand(query, conn))
+                    {
+                        comand.Parameters.AddWithValue("@evento", eventoid);
+
+                        using (var leitura = comand.ExecuteReader())
+                        {
+                            while (leitura.Read())
+                            {
+                                alunos.Add(MapearRegistro(leitura));
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex){
+                MessageBox.Show(ex.Message);
+            }
+
+            return alunos;
+        }
+
         public RegistroPresenca buscarPorAlunoEvento(int alunoid, int eventoid)
         {
             try

@@ -124,7 +124,7 @@ namespace FatecPresenca.Models
             dispositivo = new FTRScan();
 
             if (!dispositivo.OpenDevice())
-                throw new Exception();
+                c.Cancel();
 
 
             if (await dispositivo.takeBiometricIdentify(c))

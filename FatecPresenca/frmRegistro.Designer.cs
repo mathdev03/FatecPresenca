@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             pictureBox1 = new PictureBox();
             dgvDadosRegistro = new DataGridView();
             clmName = new DataGridViewTextBoxColumn();
@@ -65,14 +65,14 @@
             dgvDadosRegistro.AllowUserToResizeRows = false;
             dgvDadosRegistro.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             dgvDadosRegistro.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Control;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgvDadosRegistro.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dgvDadosRegistro.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvDadosRegistro.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvDadosRegistro.Columns.AddRange(new DataGridViewColumn[] { clmName, clmHorarioEntrada, clmHorarioSaida });
             dgvDadosRegistro.Location = new Point(673, 12);
@@ -183,12 +183,12 @@
             // lblStatusPresenca
             // 
             lblStatusPresenca.Font = new Font("Segoe UI Black", 17F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblStatusPresenca.ForeColor = Color.Green;
+            lblStatusPresenca.ForeColor = Color.Black;
             lblStatusPresenca.Location = new Point(10, 18);
             lblStatusPresenca.Name = "lblStatusPresenca";
             lblStatusPresenca.Size = new Size(451, 46);
             lblStatusPresenca.TabIndex = 44;
-            lblStatusPresenca.Text = "REGISTRO SUCESSO: 08:12:10";
+            lblStatusPresenca.Text = "STATUS REGISTRO";
             lblStatusPresenca.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // btnConcluir

@@ -84,21 +84,21 @@
             // presençaToolStripMenuItem
             // 
             presençaToolStripMenuItem.Name = "presençaToolStripMenuItem";
-            presençaToolStripMenuItem.Size = new Size(224, 26);
+            presençaToolStripMenuItem.Size = new Size(153, 26);
             presençaToolStripMenuItem.Text = "Presença";
             presençaToolStripMenuItem.Click += presençaToolStripMenuItem_Click;
             // 
             // eventoToolStripMenuItem
             // 
             eventoToolStripMenuItem.Name = "eventoToolStripMenuItem";
-            eventoToolStripMenuItem.Size = new Size(224, 26);
+            eventoToolStripMenuItem.Size = new Size(153, 26);
             eventoToolStripMenuItem.Text = "Evento";
             eventoToolStripMenuItem.Click += eventoToolStripMenuItem_Click;
             // 
             // relatórioToolStripMenuItem
             // 
             relatórioToolStripMenuItem.Name = "relatórioToolStripMenuItem";
-            relatórioToolStripMenuItem.Size = new Size(224, 26);
+            relatórioToolStripMenuItem.Size = new Size(153, 26);
             relatórioToolStripMenuItem.Text = "Relatório";
             // 
             // sobreToolStripMenuItem
@@ -156,7 +156,6 @@
             lblHorarioInicio.Size = new Size(62, 25);
             lblHorarioInicio.TabIndex = 4;
             lblHorarioInicio.Text = "08:00";
-            lblHorarioInicio.Click += lblHorarioInicio_Click;
             // 
             // label3
             // 

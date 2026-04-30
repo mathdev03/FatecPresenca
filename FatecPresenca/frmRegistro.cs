@@ -46,6 +46,25 @@ namespace FatecPresenca
                 btnPararIdent.Enabled = habilitado;
         }
 
+        public void MostrarNome(string name)
+        {
+            lblNomeAluno.Text = name;
+        }
+
+        public void MensagemStatus(bool status, string mensagem)
+        {
+            if (status)
+            {
+                lblStatusPresenca.Text = mensagem;
+                lblStatusPresenca.ForeColor = Color.Green;
+            }
+            else
+            {
+                lblStatusPresenca.Text = mensagem;
+                lblStatusPresenca.ForeColor = Color.Red;
+            }
+        }
+
         public void AtualizarTabela(IEnumerable<RegistroDTO> dados)
         {
             dgvDadosRegistro.DataSource = null;

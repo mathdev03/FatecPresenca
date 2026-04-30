@@ -60,7 +60,8 @@ namespace FatecPresenca.Models.Servico
 
             int idAluno = Convert.ToInt32(group.Length == 0 ? null : group.MaxBy(g => g.Count())?.Key);
 
-            if (idAluno <= 0) return null;
+            if (idAluno <= 0) 
+                throw new Exception("Aluno não identificado!");
             
             return await _aluno.buscarAluno(idAluno);
         }

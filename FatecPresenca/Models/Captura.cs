@@ -117,14 +117,14 @@ namespace FatecPresenca.Models
             return !(uns > zeros);
         }
 
-        public async Task<List<Template>> identificar(List<Template> templates, CancellationTokenSource c = default)
+        public async Task<List<Template>> identificar(List<Template> templates, 
+            CancellationTokenSource c = default)
         {
             List<Template> temps = new List<Template>();
             dispositivo = new FTRScan();
 
-            if (!dispositivo.OpenDevice()) return null;
-
-            MessageBox.Show("Identificando!");
+            if (!dispositivo.OpenDevice())
+                throw new Exception();
 
 
             if (await dispositivo.takeBiometricIdentify(c))

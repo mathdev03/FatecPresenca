@@ -33,7 +33,7 @@ namespace FatecPresenca.Presenter
             _serviceIdentificarAluno = ident;
             _serviceAluno = aluno;
 
-            _view.carregarLista += async (_, _) => await carregarJanela();
+            _view.carregarLista += async (_, _) => await carregarLista();
             _view.iniciarLeitura += async (_, _) => await initAsync();
             _view.fimLeitura += (_, _) => Cancelar();
             _view.fecharJanela += (_, _) => FecharJanela();
@@ -50,33 +50,46 @@ namespace FatecPresenca.Presenter
 
             _view.HabilitarCancelar(true);
 
-            try
+            while (true)
             {
-                while (true)
+                var agora = DateTime.Now;
+
+                try
                 {
+                    // Identificação
                     var aluno = await _serviceIdentificarAluno.identificarAluno(_cts);
 
+                    // Cancela caso aperte o botão
                     _cts.Token.ThrowIfCancellationRequested();
 
-                    bool registro = _serviceRegistro.resgitrarPassagem(aluno.getId(), _view.idEvento, TimeOnly.FromDateTime(DateTime.Now));
-                    await carregarJanela();
-                }
+                    // Registrar aluno
+                    bool registro = _serviceRegistro.resgitrarPassagem(aluno.getId(), _view.idEvento, 
+                        TimeOnly.FromDateTime(agora));
 
-            }
-            catch (OperationCanceledException)
-            {
-                MessageBox.Show("Fechando o registro", "AVISO", MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);    
+                    // Mostrar na tela
+                    _view.MostrarNome(aluno.getNome());
+                    _view.MensagemStatus(true, $"REGISTRO SUCESSO: {agora.ToString("HH:mm:ss")}");
+
+                    // Atualizar a lista
+                    await carregarLista();
+                }
+                catch (OperationCanceledException)
+                {
+                    MessageBox.Show("Fechando o registro", "AVISO", MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    //MessageBox.Show(ex.Message);
+                    _view.MensagemStatus(false, $"REGISTRO FALHA: {agora.ToString("HH:mm:ss")}");
+                }
             }
         }
 
         private void Cancelar() => _cts?.Cancel();
 
-        private async Task carregarJanela()
+        private async Task carregarLista()
         {
             var presenca = _serviceRegistro.todosRegistros(_view.idEvento);
 
@@ -94,6 +107,10 @@ namespace FatecPresenca.Presenter
             _view.AtualizarTabela(lista);
         }
 
-        private void FecharJanela() => _view.Close();
+        private void FecharJanela()
+        {
+            _cts?.Cancel();
+            _view.Close();
+        }
     }
 }

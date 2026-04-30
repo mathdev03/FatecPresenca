@@ -20,7 +20,6 @@ namespace FatecPresenca
             this.ForeColor = Color.White;
             msMenu.ForeColor = Color.Black;
 
-
             // Windows Forms config default
             lblHorárioAtual.Text = DateTime.Now.ToString("HH:mm");
 
@@ -44,6 +43,8 @@ namespace FatecPresenca
 
             lblNomeEvento.Text = evento.Nome;
             lblData.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            lblHorarioInicio.Text = evento.Periodo.inicio.ToString("HH:mm");
+            lblHorárioFinal.Text = evento.Periodo.fim.ToString("HH:mm");
         }
 
         private void eventoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -65,7 +66,6 @@ namespace FatecPresenca
                 MessageBox.Show("Nenhum evento em andamento!");
                 return;
             }
-
 
 
             frmRegistro dialog = new frmRegistro(evento.Id);
@@ -92,11 +92,12 @@ namespace FatecPresenca
                 lblStatusRegistro.Text = "REGISTRO FECHADO";
                 lblStatusRegistro.ForeColor = Color.Red;
             }
+            else
+            {
+                lblStatusRegistro.Text = "REGISTRO ABERTO";
+                lblStatusRegistro.ForeColor = Color.Green;
+            }
         }
 
-        private void lblHorarioInicio_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

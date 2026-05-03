@@ -15,9 +15,10 @@ namespace FatecPresenca.DAO
         public Conexao() {
 
             __conexao = "Server=localhost;" +
+                        "Port=3306;" +
                         "Database=fatecpresenca;" +
-                        "User=root;" +
-                        "Password= ";
+                        "Uid=root;" +
+                        "Pwd= ";
         }
 
         public MySqlConnection getConexao()

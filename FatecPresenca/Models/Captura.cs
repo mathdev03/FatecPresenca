@@ -33,6 +33,8 @@ namespace FatecPresenca.Models
 
             if (!dispositivo.OpenDevice()) return true;
 
+            dispositivo.ConfigScan();
+
             MessageBox.Show("Registrando....");
 
             dispositivo.RegisterBiometric(finger);
@@ -57,6 +59,8 @@ namespace FatecPresenca.Models
 
             // Pega a digital
             if (!dispositivo.OpenDevice()) return true;
+
+            dispositivo.ConfigScan();
 
             MessageBox.Show("Registrando....");
 
@@ -93,6 +97,8 @@ namespace FatecPresenca.Models
             dispositivo = new FTRScan();
 
             if (!dispositivo.OpenDevice()) return true;
+
+            dispositivo.ConfigScan();
 
             MessageBox.Show("Verificando...");
 

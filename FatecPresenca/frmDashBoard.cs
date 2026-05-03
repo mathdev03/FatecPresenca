@@ -7,97 +7,70 @@ using System.Diagnostics.Eventing.Reader;
 
 namespace FatecPresenca
 {
-    public partial class frmDashBoard : Form
+    public partial class frmDashBoard : Form, DashboardView
     {
-        Evento evento;
+        public event EventHandler CarregarEvento;
+        public event EventHandler AbrirEventos;
+        public event EventHandler AbrirPresenca;
+        public event EventHandler ClicarRegistrar;
+        public event EventHandler ClicarSair;
+        public event EventHandler TickHorario;
 
+        private readonly DashboardPresenter _presenter;
+
+        public string NomeEvento { set => lblNomeEvento.Text = value; }
+        public string Data { set => lblData.Text = value; }
+        public string HorarioInicio { set => lblHorarioInicio.Text = value; }
+        public string HorarioFinal { set => lblHorarioFinal.Text = value; }
+        public string HorarioAtual { set => lblHorarioAtual.Text = value; }
+        public string StatusRegistroText { set => lblStatusRegistro.Text = value; }
+        public Color StatusRegistroForeColor { set => lblStatusRegistro.ForeColor = value; }
+        public int EventoId => 0;
 
         public frmDashBoard()
         {
             InitializeComponent();
 
-            // Colors Windows Forms Default
             this.ForeColor = Color.White;
             msMenu.ForeColor = Color.Black;
 
-            // Windows Forms config default
-            lblHorárioAtual.Text = DateTime.Now.ToString("HH:mm");
+            lblHorarioAtual.Text = DateTime.Now.ToString("HH:mm");
 
-            EventoAtual();
+            _presenter = new DashboardPresenter(this);
+
+            this.Load += (_, _) => CarregarEvento?.Invoke(this, EventArgs.Empty);
+            eventoToolStripMenuItem.Click += (_, _) => AbrirEventos?.Invoke(this, EventArgs.Empty);
+            presençaToolStripMenuItem.Click += (_, _) => AbrirPresenca?.Invoke(this, EventArgs.Empty);
+            btnRegistrar.Click += (_, _) => ClicarRegistrar?.Invoke(this, EventArgs.Empty);
+            btnSair.Click += (_, _) => ClicarSair?.Invoke(this, EventArgs.Empty);
+            tmrHorarioAtual.Tick += (_, _) => TickHorario?.Invoke(this, EventArgs.Empty);
         }
 
-        private void EventoAtual()
+        public void MostrarMensagem(string mensagem)
         {
-            EventoBD bd = new EventoBD();
-
-            var lista = bd.carregarEventos();
-
-            foreach (var e in lista) {
-                if (e.EstaEmAndamento()) {
-                    evento = e;
-                    break;
-                }
-            }
-
-            if (evento == null) return;
-
-            lblNomeEvento.Text = evento.Nome;
-            lblData.Text = DateTime.Now.ToString("dd/MM/yyyy");
-            lblHorarioInicio.Text = evento.Periodo.inicio.ToString("HH:mm");
-            lblHorárioFinal.Text = evento.Periodo.fim.ToString("HH:mm");
+            MessageBox.Show(mensagem);
         }
 
-        private void eventoToolStripMenuItem_Click(object sender, EventArgs e)
+        public void AbrirFormRegistro(int idEvento)
         {
-            frmEventos evento = new frmEventos();
-            evento.ShowDialog();
-        }
+            var dialog = new frmRegistro(idEvento);
+            var servicoRegistro = new ServicoRegistro();
+            var servicoIdentificarAluno = new ServicoIdentificarAluno();
+            var servicoAluno = new ServicoAluno();
 
-        private void presençaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmPresenca presenca = new frmPresenca();
-            presenca.ShowDialog();
-        }
-
-        private void btnRegistrar_Click(object sender, EventArgs e)
-        {
-            if (evento == null)
-            {
-                MessageBox.Show("Nenhum evento em andamento!");
-                return;
-            }
-
-
-            frmRegistro dialog = new frmRegistro(evento.Id);
-            ServicoRegistro registro = new ServicoRegistro();
-            ServicoIdentificarAluno alunoIdent = new ServicoIdentificarAluno();
-            ServicoAluno aluno = new ServicoAluno();
-
-            var presenter = new RegistroPresenter(dialog, registro, alunoIdent, aluno);
+            var registroPresenter = new RegistroPresenter(dialog, servicoRegistro, servicoIdentificarAluno, servicoAluno);
             dialog.ShowDialog();
         }
-        private void btnSair_Click(object sender, EventArgs e)
+
+        public void FecharForm()
         {
             this.Close();
         }
 
-        private void tmrHorarioAtual_Tick(object sender, EventArgs e)
-        {
-            lblHorárioAtual.Text = DateTime.Now.ToString("HH:mm");
-
-            if (evento == null) return;
-
-            if (!evento.PodeRegistrar()) 
-            { 
-                lblStatusRegistro.Text = "REGISTRO FECHADO";
-                lblStatusRegistro.ForeColor = Color.Red;
-            }
-            else
-            {
-                lblStatusRegistro.Text = "REGISTRO ABERTO";
-                lblStatusRegistro.ForeColor = Color.Green;
-            }
-        }
-
+        private void eventoToolStripMenuItem_Click(object sender, EventArgs e) { }
+        private void presençaToolStripMenuItem_Click(object sender, EventArgs e) { }
+        private void btnRegistrar_Click(object sender, EventArgs e) { }
+        private void btnSair_Click(object sender, EventArgs e) { }
+        private void tmrHorarioAtual_Tick(object sender, EventArgs e) { }
     }
 }

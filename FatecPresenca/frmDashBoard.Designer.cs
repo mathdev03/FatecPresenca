@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             msMenu = new MenuStrip();
             consultaToolStripMenuItem = new ToolStripMenuItem();
             presençaToolStripMenuItem = new ToolStripMenuItem();
@@ -44,19 +44,19 @@
             label3 = new Label();
             label4 = new Label();
             lblData = new Label();
-            lblHorárioFinal = new Label();
+            lblHorarioFinal = new Label();
             panel1 = new Panel();
-            lblHorárioAtual = new Label();
+            lblHorarioAtual = new Label();
             lblStatusRegistro = new Label();
             dgvDadosRegistro = new DataGridView();
             clmName = new DataGridViewTextBoxColumn();
-            clmSemestre = new DataGridViewTextBoxColumn();
             clmStatusEntrada = new DataGridViewTextBoxColumn();
             clmStatusSaida = new DataGridViewTextBoxColumn();
             btnRegistrar = new Button();
             btnSair = new Button();
             txtPesquisar = new TextBox();
             tmrHorarioAtual = new System.Windows.Forms.Timer(components);
+            cmbEventos = new ComboBox();
             msMenu.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvDadosRegistro).BeginInit();
@@ -190,49 +190,49 @@
             lblData.TabIndex = 7;
             lblData.Text = "07/06/2026";
             // 
-            // lblHorárioFinal
+            // lblHorarioFinal
             // 
-            lblHorárioFinal.AutoSize = true;
-            lblHorárioFinal.Font = new Font("Segoe UI Black", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblHorárioFinal.ForeColor = Color.White;
-            lblHorárioFinal.Location = new Point(450, 93);
-            lblHorárioFinal.Name = "lblHorárioFinal";
-            lblHorárioFinal.Size = new Size(58, 25);
-            lblHorárioFinal.TabIndex = 8;
-            lblHorárioFinal.Text = "11:30";
+            lblHorarioFinal.AutoSize = true;
+            lblHorarioFinal.Font = new Font("Segoe UI Black", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblHorarioFinal.ForeColor = Color.White;
+            lblHorarioFinal.Location = new Point(450, 93);
+            lblHorarioFinal.Name = "lblHorarioFinal";
+            lblHorarioFinal.Size = new Size(58, 25);
+            lblHorarioFinal.TabIndex = 8;
+            lblHorarioFinal.Text = "11:30";
             // 
             // panel1
             // 
             panel1.BackColor = Color.White;
             panel1.BorderStyle = BorderStyle.FixedSingle;
-            panel1.Controls.Add(lblHorárioAtual);
+            panel1.Controls.Add(lblHorarioAtual);
             panel1.Controls.Add(lblStatusRegistro);
             panel1.Location = new Point(689, 43);
             panel1.Name = "panel1";
             panel1.Size = new Size(287, 75);
             panel1.TabIndex = 9;
             // 
-            // lblHorárioAtual
+            // lblHorarioAtual
             // 
-            lblHorárioAtual.AutoSize = true;
-            lblHorárioAtual.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblHorárioAtual.ForeColor = Color.Black;
-            lblHorárioAtual.Location = new Point(111, 36);
-            lblHorárioAtual.Name = "lblHorárioAtual";
-            lblHorárioAtual.Size = new Size(66, 28);
-            lblHorárioAtual.TabIndex = 10;
-            lblHorárioAtual.Text = "00:00";
+            lblHorarioAtual.AutoSize = true;
+            lblHorarioAtual.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblHorarioAtual.ForeColor = Color.Black;
+            lblHorarioAtual.Location = new Point(111, 36);
+            lblHorarioAtual.Name = "lblHorarioAtual";
+            lblHorarioAtual.Size = new Size(66, 28);
+            lblHorarioAtual.TabIndex = 10;
+            lblHorarioAtual.Text = "00:00";
             // 
             // lblStatusRegistro
             // 
             lblStatusRegistro.AutoSize = true;
             lblStatusRegistro.Font = new Font("Segoe UI Black", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblStatusRegistro.ForeColor = Color.Green;
+            lblStatusRegistro.ForeColor = Color.Red;
             lblStatusRegistro.Location = new Point(49, 11);
             lblStatusRegistro.Name = "lblStatusRegistro";
-            lblStatusRegistro.Size = new Size(189, 25);
+            lblStatusRegistro.Size = new Size(202, 25);
             lblStatusRegistro.TabIndex = 10;
-            lblStatusRegistro.Text = "REGISTRO ABERTO";
+            lblStatusRegistro.Text = "REGISTRO FECHADO";
             // 
             // dgvDadosRegistro
             // 
@@ -241,16 +241,16 @@
             dgvDadosRegistro.AllowUserToResizeColumns = false;
             dgvDadosRegistro.AllowUserToResizeRows = false;
             dgvDadosRegistro.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dgvDadosRegistro.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dgvDadosRegistro.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgvDadosRegistro.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvDadosRegistro.Columns.AddRange(new DataGridViewColumn[] { clmName, clmSemestre, clmStatusEntrada, clmStatusSaida });
+            dgvDadosRegistro.Columns.AddRange(new DataGridViewColumn[] { clmName, clmStatusEntrada, clmStatusSaida });
             dgvDadosRegistro.Location = new Point(12, 206);
             dgvDadosRegistro.Name = "dgvDadosRegistro";
             dgvDadosRegistro.ReadOnly = true;
@@ -265,14 +265,6 @@
             clmName.MinimumWidth = 6;
             clmName.Name = "clmName";
             clmName.ReadOnly = true;
-            // 
-            // clmSemestre
-            // 
-            clmSemestre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            clmSemestre.HeaderText = "Semestre";
-            clmSemestre.MinimumWidth = 6;
-            clmSemestre.Name = "clmSemestre";
-            clmSemestre.ReadOnly = true;
             // 
             // clmStatusEntrada
             // 
@@ -339,18 +331,28 @@
             tmrHorarioAtual.Interval = 500;
             tmrHorarioAtual.Tick += tmrHorarioAtual_Tick;
             // 
+            // cmbEventos
+            // 
+            cmbEventos.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            cmbEventos.FormattingEnabled = true;
+            cmbEventos.Location = new Point(689, 154);
+            cmbEventos.Name = "cmbEventos";
+            cmbEventos.Size = new Size(287, 33);
+            cmbEventos.TabIndex = 14;
+            // 
             // frmDashBoard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Maroon;
             ClientSize = new Size(996, 638);
+            Controls.Add(cmbEventos);
             Controls.Add(txtPesquisar);
             Controls.Add(btnSair);
             Controls.Add(btnRegistrar);
             Controls.Add(dgvDadosRegistro);
             Controls.Add(panel1);
-            Controls.Add(lblHorárioFinal);
+            Controls.Add(lblHorarioFinal);
             Controls.Add(lblData);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -390,18 +392,18 @@
         private Label label3;
         private Label label4;
         private Label lblData;
-        private Label lblHorárioFinal;
+        private Label lblHorarioFinal;
         private Panel panel1;
-        private Label lblHorárioAtual;
+        private Label lblHorarioAtual;
         private Label lblStatusRegistro;
         private DataGridView dgvDadosRegistro;
         private Button btnRegistrar;
         private Button btnSair;
-        private DataGridViewTextBoxColumn clmName;
-        private DataGridViewTextBoxColumn clmSemestre;
-        private DataGridViewTextBoxColumn clmStatusEntrada;
-        private DataGridViewTextBoxColumn clmStatusSaida;
         private TextBox txtPesquisar;
         private System.Windows.Forms.Timer tmrHorarioAtual;
+        private DataGridViewTextBoxColumn clmName;
+        private DataGridViewTextBoxColumn clmStatusEntrada;
+        private DataGridViewTextBoxColumn clmStatusSaida;
+        private ComboBox cmbEventos;
     }
 }

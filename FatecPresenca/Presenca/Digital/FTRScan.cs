@@ -49,7 +49,6 @@ namespace FatecPresenca.Presenca
                 if (handle == IntPtr.Zero) throw new Exception("Dispositivo não ligado!");
 
                 Console.WriteLine("Dispositivo inciado!");
-                ConfigScan();
             }
             catch (Exception ex) {
                 MessageBox.Show(ex.Message , "Erro ao ligar");
@@ -74,7 +73,7 @@ namespace FatecPresenca.Presenca
 
         }
 
-        private void ConfigScan()
+        public void ConfigScan()
         {
             // LFD - Live Detection Finger, para obter o dedo real tirando a réplica
             uint flags = FTR_OPTIONS_DETECT_FAKE_FINGER | FTR_OPTIONS_CHECK_FAKE_REPLICA | FTR_OPTIONS_INVERT_IMAGE;

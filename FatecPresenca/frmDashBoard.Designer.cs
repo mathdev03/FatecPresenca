@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             msMenu = new MenuStrip();
             consultaToolStripMenuItem = new ToolStripMenuItem();
             presençaToolStripMenuItem = new ToolStripMenuItem();
@@ -49,14 +49,14 @@
             lblHorarioAtual = new Label();
             lblStatusRegistro = new Label();
             dgvDadosRegistro = new DataGridView();
-            clmName = new DataGridViewTextBoxColumn();
-            clmStatusEntrada = new DataGridViewTextBoxColumn();
-            clmStatusSaida = new DataGridViewTextBoxColumn();
             btnRegistrar = new Button();
             btnSair = new Button();
             txtPesquisar = new TextBox();
             tmrHorarioAtual = new System.Windows.Forms.Timer(components);
             cmbEventos = new ComboBox();
+            clmName = new DataGridViewTextBoxColumn();
+            clmStatusEntrada = new DataGridViewTextBoxColumn();
+            clmStatusSaida = new DataGridViewTextBoxColumn();
             msMenu.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvDadosRegistro).BeginInit();
@@ -131,9 +131,9 @@
             lblNomeEvento.ForeColor = Color.White;
             lblNomeEvento.Location = new Point(100, 55);
             lblNomeEvento.Name = "lblNomeEvento";
-            lblNomeEvento.Size = new Size(151, 25);
+            lblNomeEvento.Size = new Size(20, 25);
             lblNomeEvento.TabIndex = 2;
-            lblNomeEvento.Text = "FATEC ABERTA";
+            lblNomeEvento.Text = "-";
             // 
             // label2
             // 
@@ -153,9 +153,9 @@
             lblHorarioInicio.ForeColor = Color.White;
             lblHorarioInicio.Location = new Point(186, 93);
             lblHorarioInicio.Name = "lblHorarioInicio";
-            lblHorarioInicio.Size = new Size(62, 25);
+            lblHorarioInicio.Size = new Size(20, 25);
             lblHorarioInicio.TabIndex = 4;
-            lblHorarioInicio.Text = "08:00";
+            lblHorarioInicio.Text = "-";
             // 
             // label3
             // 
@@ -186,9 +186,9 @@
             lblData.ForeColor = Color.White;
             lblData.Location = new Point(363, 55);
             lblData.Name = "lblData";
-            lblData.Size = new Size(118, 25);
+            lblData.Size = new Size(20, 25);
             lblData.TabIndex = 7;
-            lblData.Text = "07/06/2026";
+            lblData.Text = "-";
             // 
             // lblHorarioFinal
             // 
@@ -197,9 +197,9 @@
             lblHorarioFinal.ForeColor = Color.White;
             lblHorarioFinal.Location = new Point(450, 93);
             lblHorarioFinal.Name = "lblHorarioFinal";
-            lblHorarioFinal.Size = new Size(58, 25);
+            lblHorarioFinal.Size = new Size(20, 25);
             lblHorarioFinal.TabIndex = 8;
-            lblHorarioFinal.Text = "11:30";
+            lblHorarioFinal.Text = "-";
             // 
             // panel1
             // 
@@ -241,46 +241,23 @@
             dgvDadosRegistro.AllowUserToResizeColumns = false;
             dgvDadosRegistro.AllowUserToResizeRows = false;
             dgvDadosRegistro.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = SystemColors.Control;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            dgvDadosRegistro.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dgvDadosRegistro.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvDadosRegistro.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvDadosRegistro.Columns.AddRange(new DataGridViewColumn[] { clmName, clmStatusEntrada, clmStatusSaida });
             dgvDadosRegistro.Location = new Point(12, 206);
             dgvDadosRegistro.Name = "dgvDadosRegistro";
             dgvDadosRegistro.ReadOnly = true;
+            dgvDadosRegistro.RowHeadersVisible = false;
             dgvDadosRegistro.RowHeadersWidth = 52;
             dgvDadosRegistro.Size = new Size(964, 316);
             dgvDadosRegistro.TabIndex = 10;
-            // 
-            // clmName
-            // 
-            clmName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            clmName.HeaderText = "Nome";
-            clmName.MinimumWidth = 6;
-            clmName.Name = "clmName";
-            clmName.ReadOnly = true;
-            // 
-            // clmStatusEntrada
-            // 
-            clmStatusEntrada.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            clmStatusEntrada.HeaderText = "Status Entrada";
-            clmStatusEntrada.MinimumWidth = 6;
-            clmStatusEntrada.Name = "clmStatusEntrada";
-            clmStatusEntrada.ReadOnly = true;
-            // 
-            // clmStatusSaida
-            // 
-            clmStatusSaida.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            clmStatusSaida.HeaderText = "Status Saída";
-            clmStatusSaida.MinimumWidth = 6;
-            clmStatusSaida.Name = "clmStatusSaida";
-            clmStatusSaida.ReadOnly = true;
             // 
             // btnRegistrar
             // 
@@ -333,12 +310,36 @@
             // 
             // cmbEventos
             // 
+            cmbEventos.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbEventos.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            cmbEventos.FormattingEnabled = true;
             cmbEventos.Location = new Point(689, 154);
             cmbEventos.Name = "cmbEventos";
             cmbEventos.Size = new Size(287, 33);
             cmbEventos.TabIndex = 14;
+            // 
+            // clmName
+            // 
+            clmName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            clmName.HeaderText = "Nome";
+            clmName.MinimumWidth = 6;
+            clmName.Name = "clmName";
+            clmName.ReadOnly = true;
+            // 
+            // clmStatusEntrada
+            // 
+            clmStatusEntrada.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            clmStatusEntrada.HeaderText = "Status Entrada";
+            clmStatusEntrada.MinimumWidth = 6;
+            clmStatusEntrada.Name = "clmStatusEntrada";
+            clmStatusEntrada.ReadOnly = true;
+            // 
+            // clmStatusSaida
+            // 
+            clmStatusSaida.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            clmStatusSaida.HeaderText = "Status Saída";
+            clmStatusSaida.MinimumWidth = 6;
+            clmStatusSaida.Name = "clmStatusSaida";
+            clmStatusSaida.ReadOnly = true;
             // 
             // frmDashBoard
             // 
@@ -401,9 +402,9 @@
         private Button btnSair;
         private TextBox txtPesquisar;
         private System.Windows.Forms.Timer tmrHorarioAtual;
+        private ComboBox cmbEventos;
         private DataGridViewTextBoxColumn clmName;
         private DataGridViewTextBoxColumn clmStatusEntrada;
         private DataGridViewTextBoxColumn clmStatusSaida;
-        private ComboBox cmbEventos;
     }
 }

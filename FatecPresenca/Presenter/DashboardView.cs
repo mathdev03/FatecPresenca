@@ -3,18 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FatecPresenca.Models;
 
 namespace FatecPresenca.Presenter
 {
     internal interface DashboardView
     {
+        // Eventos do Form
         event EventHandler CarregarEvento;
         event EventHandler AbrirEventos;
         event EventHandler AbrirPresenca;
         event EventHandler ClicarRegistrar;
         event EventHandler ClicarSair;
         event EventHandler TickHorario;
+        event EventHandler<int>? EventoSelecionado;
 
+        // Parametros
         string NomeEvento { set; }
         string Data { set; }
         string HorarioInicio { set; }
@@ -26,6 +30,8 @@ namespace FatecPresenca.Presenter
 
         void MostrarMensagem(string mensagem);
         void AbrirFormRegistro(int idEvento);
+        void ObterEventos(List<EventoDTO> ev);
+        void TabelaAlunos(IEnumerable<DashboardDTO> dto);
         void FecharForm();
     }
 }

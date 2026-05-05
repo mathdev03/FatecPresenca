@@ -18,7 +18,7 @@ namespace FatecPresenca.DAO
                         "Port=3306;" +
                         "Database=fatecpresenca;" +
                         "Uid=root;" +
-                        "Pwd= ";
+                        "Pwd= ServidorMatheus03";
         }
 
         public MySqlConnection getConexao()

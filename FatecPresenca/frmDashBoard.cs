@@ -15,6 +15,7 @@ namespace FatecPresenca
         public event EventHandler ClicarRegistrar;
         public event EventHandler ClicarSair;
         public event EventHandler TickHorario;
+        public event EventHandler<int>? EventoSelecionado;
 
         private readonly DashboardPresenter _presenter;
 
@@ -25,16 +26,21 @@ namespace FatecPresenca
         public string HorarioAtual { set => lblHorarioAtual.Text = value; }
         public string StatusRegistroText { set => lblStatusRegistro.Text = value; }
         public Color StatusRegistroForeColor { set => lblStatusRegistro.ForeColor = value; }
-        public int EventoId => 0;
+        public int EventoId { get { 
+                if(cmbEventos.SelectedItem is Evento evento)
+                    return (int)evento.Id;
+                return 0;
+            } }
 
         public frmDashBoard()
         {
             InitializeComponent();
 
-            this.ForeColor = Color.White;
+            //this.ForeColor = Color.White;
             msMenu.ForeColor = Color.Black;
 
             lblHorarioAtual.Text = DateTime.Now.ToString("HH:mm");
+            dgvDadosRegistro.Columns.Clear();
 
             _presenter = new DashboardPresenter(this);
 
@@ -44,6 +50,15 @@ namespace FatecPresenca
             btnRegistrar.Click += (_, _) => ClicarRegistrar?.Invoke(this, EventArgs.Empty);
             btnSair.Click += (_, _) => ClicarSair?.Invoke(this, EventArgs.Empty);
             tmrHorarioAtual.Tick += (_, _) => TickHorario?.Invoke(this, EventArgs.Empty);
+
+            // Escolhendo os eventos
+            cmbEventos.SelectedIndexChanged += (s, e) =>
+            {
+                if (cmbEventos.SelectedItem is EventoDTO dto)
+                {
+                    EventoSelecionado?.Invoke(this, dto.id);
+                }
+            };
         }
 
         public void MostrarMensagem(string mensagem)
@@ -60,6 +75,20 @@ namespace FatecPresenca
 
             var registroPresenter = new RegistroPresenter(dialog, servicoRegistro, servicoIdentificarAluno, servicoAluno);
             dialog.ShowDialog();
+        }
+
+        public void ObterEventos(List<EventoDTO> ev)
+        {
+
+            cmbEventos.DataSource = ev;
+            cmbEventos.DisplayMember = "Nome";
+            cmbEventos.ValueMember = "id";
+        }
+
+        public void TabelaAlunos(IEnumerable<DashboardDTO> dto)
+        {
+            dgvDadosRegistro.DataSource = null;
+            dgvDadosRegistro.DataSource = dto;
         }
 
         public void FecharForm()

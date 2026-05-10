@@ -43,6 +43,8 @@ namespace FatecPresenca.Models
 
         public bool EstaEncerrado() => DateTime.Now > Periodo.fim;
 
+        public bool EstaFechado() => DateTime.Now.TimeOfDay > Periodo.fim.TimeOfDay;
+
         public bool PodeRegistrar() {
             if (!EstaEmAndamento()) return false;
 

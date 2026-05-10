@@ -42,7 +42,7 @@ namespace FatecPresenca.Models
 
         private bool verificarQualidade(int qualidade) {
             if (qualidade < 0 && qualidade > 100) return true;
-            if(qualidade <= 40) return true;
+            if(qualidade <= 20) return true;
 
             return false;
         }

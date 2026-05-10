@@ -97,7 +97,8 @@ namespace FatecPresenca.DAO
                 {
                     var query = @"
                     SELECT * FROM registropresenca
-                    WHERE RP_EventoID = @evento
+                    WHERE RP_EventoID = @evento AND 
+                            RP_DataEvento = @dataAtual
                     ";
 
                     conn.Open();
@@ -105,6 +106,7 @@ namespace FatecPresenca.DAO
                     using (var comand = new MySqlCommand(query, conn))
                     {
                         comand.Parameters.AddWithValue("@evento", eventoid);
+                        comand.Parameters.AddWithValue("@dataAtual", DateTime.Now.ToString("yyyy-MM-dd"));
 
                         using (var leitura = comand.ExecuteReader())
                         {
@@ -132,7 +134,8 @@ namespace FatecPresenca.DAO
                     var query = @"
                     SELECT * FROM registropresenca
                     WHERE RP_AlunoID = @aluno AND
-                          RP_EventoID = @evento
+                          RP_EventoID = @evento AND
+                          RP_DataEvento = @dataAtual
                     ";
 
                     conn.Open();
@@ -141,6 +144,7 @@ namespace FatecPresenca.DAO
                     {
                         comand.Parameters.AddWithValue("@aluno", alunoid);
                         comand.Parameters.AddWithValue("@evento", eventoid);
+                        comand.Parameters.AddWithValue("@dataAtual", DateTime.Now.ToString("yyyy-MM-dd"));
 
                         using (var leitura = comand.ExecuteReader())
                         {

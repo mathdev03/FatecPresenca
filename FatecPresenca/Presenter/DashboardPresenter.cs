@@ -52,9 +52,9 @@ namespace FatecPresenca.Presenter
         private void CarregarEventos()
         {
             var lista = _eventoBD.carregarEventos();
-            
 
-            var eventosAtivos = lista.Where(x => x.EstaEmAndamento()).ToList();
+            var eventosAtivos = lista.Where(x => x.EstaEmAndamento() && 
+                                            !x. EstaFechado()).ToList();
 
             var eventoInternos = eventosAtivos.Select(e => new EventoDTO
             {

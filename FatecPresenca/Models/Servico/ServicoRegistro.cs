@@ -27,7 +27,8 @@ namespace FatecPresenca.Models.Servico
         {
             try
             {
-                var registro = registroBD.buscarPorAlunoEvento(AlunoId, EventoId);
+                var registro = registroBD.buscarPorAlunoEvento(AlunoId, EventoId); // Buscar registro
+                var evento = eventoBD.buscarEvento(EventoId); // Buscar evento
 
                 // Caso não encontra registro do aluno
                 if (registro == null)
@@ -36,11 +37,13 @@ namespace FatecPresenca.Models.Servico
 
                     registro.RegistrarEntrada(horario);
 
-                    var evento = eventoBD.buscarEvento(EventoId);
                     registro.ValidarStatus(evento.Janela.EntradaFim);
 
                     return registroBD.inserir(registro);
                 }
+
+                if (!evento.Janela.EstaNoHorarioSaida(horario))
+                    throw new ArgumentException("Não é possível registrar a saída fora de horário!");
 
                 registro.RegistrarSaida(horario);
 

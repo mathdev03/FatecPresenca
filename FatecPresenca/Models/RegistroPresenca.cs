@@ -78,6 +78,14 @@ namespace FatecPresenca.Models
             return HorarioEntrada.Value > limite;
         }
 
+        public string EstaPendente()
+        {
+            if (HorarioEntrada.HasValue && !HorarioSaida.HasValue)
+                return "Pendente";
+
+            return Status.ToString();
+        }
+
         public void ValidarStatus(TimeOnly limite)
         {
             if (!HorarioEntrada.HasValue)

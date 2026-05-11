@@ -174,7 +174,7 @@ namespace FatecPresenca.DAO
                     leitura.GetInt32("RP_EventoID"),
                     leitura.GetDateTime("RP_DataEvento").Date,
                     id
-                );
+            );
 
             // Status
             StatusPresenca status = Enum.Parse<StatusPresenca>(leitura.GetString("RP_Status"));

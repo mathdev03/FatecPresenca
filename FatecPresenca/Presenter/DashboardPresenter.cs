@@ -84,7 +84,7 @@ namespace FatecPresenca.Presenter
             var lista = registro.Select(p => new DashboardDTO
             {
                 NOME = nomesMap.GetValueOrDefault(p.AlunoId, "Aluno não encontrado"),
-                STATUS = p.Status.ToString()
+                STATUS = p.EstaPendente()
             }).ToList();
 
             _view.TabelaAlunos(lista);

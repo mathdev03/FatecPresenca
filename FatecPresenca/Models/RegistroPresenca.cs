@@ -11,6 +11,7 @@ namespace FatecPresenca.Models
         Presente,
         Atrasado,
         Ausente,
+        Pendente,
         Justificado
     }
 
@@ -47,7 +48,7 @@ namespace FatecPresenca.Models
             DataCriacao = DateTime.Now;
         }
 
-        public void RegistrarEntrada(TimeOnly horario, StatusPresenca status = StatusPresenca.Presente)
+        public void RegistrarEntrada(TimeOnly horario, StatusPresenca status = StatusPresenca.Ausente)
         {
             if (HorarioEntrada.HasValue)
                 throw new InvalidOperationException("Entrada já registrada para este aluno neste evento");
@@ -56,7 +57,6 @@ namespace FatecPresenca.Models
             TotalPassagens++;
             DataAlteracao = DateTime.Now;
 
-            // Status inicial!
             Status = status;
         }
 
@@ -70,35 +70,30 @@ namespace FatecPresenca.Models
             DataAlteracao = DateTime.Now;
         }
 
-        public bool EstaAtrasado(TimeOnly limite)
+        public void AlunoAusente()
         {
-            if (!HorarioEntrada.HasValue)
-                return false;
-
-            return HorarioEntrada.Value > limite;
+            Status = StatusPresenca.Ausente;
         }
 
-        public string EstaPendente()
+        private bool EstaAusenteOuAtraso(TimeOnly limite)
         {
-            if (HorarioEntrada.HasValue && !HorarioSaida.HasValue)
-                return "Pendente";
+            if(limite == default)
+                    return false;
 
-            return Status.ToString();
-        }
-
-        public void ValidarStatus(TimeOnly limite)
-        {
-            if (!HorarioEntrada.HasValue)
-            {
-                Status = StatusPresenca.Ausente;
-                return;
-            }
-
-            if (EstaAtrasado(limite))
+            if (HorarioEntrada.Value > limite)
             {
                 Status = StatusPresenca.Atrasado;
-                return;
+                return true;
             }
+
+            Status = StatusPresenca.Pendente;
+            return true;
+        }
+
+        public void ValidarStatus(TimeOnly limiteEntrada = default)
+        {
+            if (EstaAusenteOuAtraso(limiteEntrada))
+                return;
 
             Status = StatusPresenca.Presente;
         }

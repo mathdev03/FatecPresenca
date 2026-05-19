@@ -13,6 +13,7 @@ namespace FatecPresenca.Presenter
         event EventHandler CarregarEvento;
         event EventHandler AbrirEventos;
         event EventHandler AbrirPresenca;
+        event EventHandler abrirRelatorio;
         event EventHandler ClicarRegistrar;
         event EventHandler ClicarSair;
         event EventHandler TickHorario;

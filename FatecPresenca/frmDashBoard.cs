@@ -11,6 +11,7 @@ namespace FatecPresenca
     {
         public event EventHandler CarregarEvento;
         public event EventHandler AbrirEventos;
+        public event EventHandler abrirRelatorio;
         public event EventHandler AbrirPresenca;
         public event EventHandler ClicarRegistrar;
         public event EventHandler ClicarSair;
@@ -45,8 +46,10 @@ namespace FatecPresenca
             _presenter = new DashboardPresenter(this);
 
             this.Load += (_, _) => CarregarEvento?.Invoke(this, EventArgs.Empty);
+            btnAtualizarLista.Click += (_, _) => CarregarEvento?.Invoke(this, EventArgs.Empty);
             eventoToolStripMenuItem.Click += (_, _) => AbrirEventos?.Invoke(this, EventArgs.Empty);
             presençaToolStripMenuItem.Click += (_, _) => AbrirPresenca?.Invoke(this, EventArgs.Empty);
+            relatórioToolStripMenuItem.Click += (_, _) => abrirRelatorio?.Invoke(this, EventArgs.Empty);
             btnRegistrar.Click += (_, _) => ClicarRegistrar?.Invoke(this, EventArgs.Empty);
             btnSair.Click += (_, _) => ClicarSair?.Invoke(this, EventArgs.Empty);
             tmrHorarioAtual.Tick += (_, _) => TickHorario?.Invoke(this, EventArgs.Empty);

@@ -49,14 +49,15 @@
             lblHorarioAtual = new Label();
             lblStatusRegistro = new Label();
             dgvDadosRegistro = new DataGridView();
+            clmName = new DataGridViewTextBoxColumn();
+            clmStatusEntrada = new DataGridViewTextBoxColumn();
+            clmStatusSaida = new DataGridViewTextBoxColumn();
             btnRegistrar = new Button();
             btnSair = new Button();
             txtPesquisar = new TextBox();
             tmrHorarioAtual = new System.Windows.Forms.Timer(components);
             cmbEventos = new ComboBox();
-            clmName = new DataGridViewTextBoxColumn();
-            clmStatusEntrada = new DataGridViewTextBoxColumn();
-            clmStatusSaida = new DataGridViewTextBoxColumn();
+            btnAtualizarLista = new Button();
             msMenu.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvDadosRegistro).BeginInit();
@@ -259,6 +260,30 @@
             dgvDadosRegistro.Size = new Size(964, 316);
             dgvDadosRegistro.TabIndex = 10;
             // 
+            // clmName
+            // 
+            clmName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            clmName.HeaderText = "Nome";
+            clmName.MinimumWidth = 6;
+            clmName.Name = "clmName";
+            clmName.ReadOnly = true;
+            // 
+            // clmStatusEntrada
+            // 
+            clmStatusEntrada.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            clmStatusEntrada.HeaderText = "Status Entrada";
+            clmStatusEntrada.MinimumWidth = 6;
+            clmStatusEntrada.Name = "clmStatusEntrada";
+            clmStatusEntrada.ReadOnly = true;
+            // 
+            // clmStatusSaida
+            // 
+            clmStatusSaida.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            clmStatusSaida.HeaderText = "Status Saída";
+            clmStatusSaida.MinimumWidth = 6;
+            clmStatusSaida.Name = "clmStatusSaida";
+            clmStatusSaida.ReadOnly = true;
+            // 
             // btnRegistrar
             // 
             btnRegistrar.BackColor = Color.White;
@@ -317,29 +342,20 @@
             cmbEventos.Size = new Size(287, 33);
             cmbEventos.TabIndex = 14;
             // 
-            // clmName
+            // btnAtualizarLista
             // 
-            clmName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            clmName.HeaderText = "Nome";
-            clmName.MinimumWidth = 6;
-            clmName.Name = "clmName";
-            clmName.ReadOnly = true;
-            // 
-            // clmStatusEntrada
-            // 
-            clmStatusEntrada.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            clmStatusEntrada.HeaderText = "Status Entrada";
-            clmStatusEntrada.MinimumWidth = 6;
-            clmStatusEntrada.Name = "clmStatusEntrada";
-            clmStatusEntrada.ReadOnly = true;
-            // 
-            // clmStatusSaida
-            // 
-            clmStatusSaida.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            clmStatusSaida.HeaderText = "Status Saída";
-            clmStatusSaida.MinimumWidth = 6;
-            clmStatusSaida.Name = "clmStatusSaida";
-            clmStatusSaida.ReadOnly = true;
+            btnAtualizarLista.BackColor = Color.White;
+            btnAtualizarLista.FlatAppearance.BorderColor = Color.Black;
+            btnAtualizarLista.FlatAppearance.BorderSize = 3;
+            btnAtualizarLista.FlatStyle = FlatStyle.Flat;
+            btnAtualizarLista.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            btnAtualizarLista.ForeColor = Color.Black;
+            btnAtualizarLista.Location = new Point(612, 153);
+            btnAtualizarLista.Name = "btnAtualizarLista";
+            btnAtualizarLista.Size = new Size(45, 34);
+            btnAtualizarLista.TabIndex = 15;
+            btnAtualizarLista.Text = "T";
+            btnAtualizarLista.UseVisualStyleBackColor = false;
             // 
             // frmDashBoard
             // 
@@ -347,6 +363,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Maroon;
             ClientSize = new Size(996, 638);
+            Controls.Add(btnAtualizarLista);
             Controls.Add(cmbEventos);
             Controls.Add(txtPesquisar);
             Controls.Add(btnSair);
@@ -406,5 +423,6 @@
         private DataGridViewTextBoxColumn clmName;
         private DataGridViewTextBoxColumn clmStatusEntrada;
         private DataGridViewTextBoxColumn clmStatusSaida;
+        private Button btnAtualizarLista;
     }
 }

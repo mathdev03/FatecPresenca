@@ -86,7 +86,7 @@ namespace FatecPresenca.DAO
             return true;
         }
 
-        public List<RegistroPresenca> buscarRegistrosPorEvento(int eventoid)
+        public List<RegistroPresenca> buscarRegistrosPorEvento(int eventoid, string dataAgora)
         {
             List<RegistroPresenca> alunos = new List<RegistroPresenca>();
 
@@ -106,7 +106,7 @@ namespace FatecPresenca.DAO
                     using (var comand = new MySqlCommand(query, conn))
                     {
                         comand.Parameters.AddWithValue("@evento", eventoid);
-                        comand.Parameters.AddWithValue("@dataAtual", DateTime.Now.ToString("yyyy-MM-dd"));
+                        comand.Parameters.AddWithValue("@dataAtual", dataAgora);
 
                         using (var leitura = comand.ExecuteReader())
                         {
@@ -125,7 +125,7 @@ namespace FatecPresenca.DAO
             return alunos;
         }
 
-        public RegistroPresenca buscarPorAlunoEvento(int alunoid, int eventoid)
+        public RegistroPresenca buscarPorAlunoEvento(int alunoid, int eventoid, string dataAgora)
         {
             try
             {
@@ -144,7 +144,7 @@ namespace FatecPresenca.DAO
                     {
                         comand.Parameters.AddWithValue("@aluno", alunoid);
                         comand.Parameters.AddWithValue("@evento", eventoid);
-                        comand.Parameters.AddWithValue("@dataAtual", DateTime.Now.ToString("yyyy-MM-dd"));
+                        comand.Parameters.AddWithValue("@dataAtual", dataAgora);
 
                         using (var leitura = comand.ExecuteReader())
                         {

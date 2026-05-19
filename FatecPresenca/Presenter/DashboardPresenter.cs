@@ -30,6 +30,7 @@ namespace FatecPresenca.Presenter
         private readonly EventoBD _eventoBD;
         private readonly RegistroAlunoBD _registroBD;
         private readonly ServicoAluno _servicoAluno;
+        private readonly ServicoRegistro _servicoRegistro;
         private Evento _evento;
 
         public DashboardPresenter(DashboardView view)
@@ -38,11 +39,13 @@ namespace FatecPresenca.Presenter
             _eventoBD = new EventoBD();
             _registroBD = new RegistroAlunoBD();
             _servicoAluno = new ServicoAluno();
+            _servicoRegistro = new ServicoRegistro();
             _evento = null;
 
             _view.CarregarEvento += (_, _) => CarregarEventos();
             _view.AbrirEventos += (_, _) => AbrirEventos();
             _view.AbrirPresenca += (_, _) => AbrirPresenca();
+            _view.abrirRelatorio += (_, _) => abrirRelatorio();
             _view.ClicarRegistrar += (_, _) => AbrirRegistro();
             _view.ClicarSair += (_, _) => _view.FecharForm();
             _view.TickHorario += (_, _) => AtualizarHorarioEStatus();
@@ -52,6 +55,14 @@ namespace FatecPresenca.Presenter
         private void CarregarEventos()
         {
             var lista = _eventoBD.carregarEventos();
+
+            if (lista.Count <= 0)
+                return;
+
+            lista.ForEach(evento =>
+            {
+                _servicoRegistro.VerificarAusencia(evento.Id);
+            });
 
             var eventosAtivos = lista.Where(x => x.EstaEmAndamento() && 
                                             !x. EstaFechado()).ToList();
@@ -75,7 +86,7 @@ namespace FatecPresenca.Presenter
             _view.HorarioInicio = _evento.Periodo.inicio.ToString("HH:mm");
             _view.HorarioFinal = _evento.Periodo.fim.ToString("HH:mm");
 
-            var registro = _registroBD.buscarRegistrosPorEvento(eventoid);
+            var registro = _registroBD.buscarRegistrosPorEvento(eventoid, DateTime.Now.ToString("yyyy-MM-dd"));
 
             // Pegar nome dos alunos presente.
             var ids = registro.Select(p => p.AlunoId).Distinct().ToList();
@@ -84,7 +95,7 @@ namespace FatecPresenca.Presenter
             var lista = registro.Select(p => new DashboardDTO
             {
                 NOME = nomesMap.GetValueOrDefault(p.AlunoId, "Aluno não encontrado"),
-                STATUS = p.EstaPendente()
+                STATUS = p.Status.ToString()
             }).ToList();
 
             _view.TabelaAlunos(lista);
@@ -112,12 +123,24 @@ namespace FatecPresenca.Presenter
         {
             var frmEventos = new frmEventos();
             frmEventos.ShowDialog();
+
+            CarregarEventos();
         }
 
         private void AbrirPresenca()
         {
             var frm = new frmPresenca();
             frm.ShowDialog();
+
+            CarregarEventos();
+        }
+
+        private void abrirRelatorio()
+        {
+            var frm = new frmRelatorio();
+            frm.ShowDialog();
+
+            CarregarEventos();
         }
 
         private void AbrirRegistro()

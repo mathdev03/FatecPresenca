@@ -33,16 +33,20 @@
             label2 = new Label();
             label3 = new Label();
             cmbEvento = new ComboBox();
-            cmbSemestre = new ComboBox();
+            cmbDataEvento = new ComboBox();
             dgvDadosRegistro = new DataGridView();
-            label4 = new Label();
-            lblStatusDigital = new Label();
             clmName = new DataGridViewTextBoxColumn();
             clmSemestre = new DataGridViewTextBoxColumn();
             clmMetodo = new DataGridViewTextBoxColumn();
             clmPontuacao = new DataGridViewTextBoxColumn();
+            label4 = new Label();
+            lblStatusAlunos = new Label();
             btnExportar = new Button();
             btnConcluir = new Button();
+            label5 = new Label();
+            label6 = new Label();
+            lblContagemPresentes = new Label();
+            lblContagemAusentes = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvDadosRegistro).BeginInit();
             SuspendLayout();
             // 
@@ -75,9 +79,9 @@
             label3.ForeColor = Color.White;
             label3.Location = new Point(306, 99);
             label3.Name = "label3";
-            label3.Size = new Size(143, 35);
+            label3.Size = new Size(88, 35);
             label3.TabIndex = 22;
-            label3.Text = "SEMESTRE";
+            label3.Text = "DATA";
             // 
             // cmbEvento
             // 
@@ -91,17 +95,17 @@
             cmbEvento.TabIndex = 30;
             cmbEvento.Tag = "";
             // 
-            // cmbSemestre
+            // cmbDataEvento
             // 
-            cmbSemestre.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbSemestre.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            cmbSemestre.FormattingEnabled = true;
-            cmbSemestre.Items.AddRange(new object[] { "6° Semestre" });
-            cmbSemestre.Location = new Point(306, 137);
-            cmbSemestre.Name = "cmbSemestre";
-            cmbSemestre.Size = new Size(232, 28);
-            cmbSemestre.TabIndex = 31;
-            cmbSemestre.Tag = "";
+            cmbDataEvento.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbDataEvento.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            cmbDataEvento.FormattingEnabled = true;
+            cmbDataEvento.Items.AddRange(new object[] { "6° Semestre" });
+            cmbDataEvento.Location = new Point(306, 137);
+            cmbDataEvento.Name = "cmbDataEvento";
+            cmbDataEvento.Size = new Size(232, 28);
+            cmbDataEvento.TabIndex = 31;
+            cmbDataEvento.Tag = "";
             // 
             // dgvDadosRegistro
             // 
@@ -126,28 +130,6 @@
             dgvDadosRegistro.RowHeadersWidth = 52;
             dgvDadosRegistro.Size = new Size(944, 304);
             dgvDadosRegistro.TabIndex = 32;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.ForeColor = Color.White;
-            label4.Location = new Point(12, 190);
-            label4.Name = "label4";
-            label4.Size = new Size(195, 35);
-            label4.TabIndex = 33;
-            label4.Text = "Total de alunos:";
-            // 
-            // lblStatusDigital
-            // 
-            lblStatusDigital.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblStatusDigital.ForeColor = Color.White;
-            lblStatusDigital.Location = new Point(200, 190);
-            lblStatusDigital.Name = "lblStatusDigital";
-            lblStatusDigital.Size = new Size(73, 35);
-            lblStatusDigital.TabIndex = 34;
-            lblStatusDigital.Text = "120";
-            lblStatusDigital.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // clmName
             // 
@@ -181,6 +163,28 @@
             clmPontuacao.Name = "clmPontuacao";
             clmPontuacao.ReadOnly = true;
             // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.ForeColor = Color.White;
+            label4.Location = new Point(12, 190);
+            label4.Name = "label4";
+            label4.Size = new Size(237, 35);
+            label4.TabIndex = 33;
+            label4.Text = "TOTAL DE ALUNOS:";
+            // 
+            // lblStatusAlunos
+            // 
+            lblStatusAlunos.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblStatusAlunos.ForeColor = Color.White;
+            lblStatusAlunos.Location = new Point(255, 190);
+            lblStatusAlunos.Name = "lblStatusAlunos";
+            lblStatusAlunos.Size = new Size(73, 35);
+            lblStatusAlunos.TabIndex = 34;
+            lblStatusAlunos.Text = "120";
+            lblStatusAlunos.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // btnExportar
             // 
             btnExportar.BackColor = Color.White;
@@ -211,18 +215,66 @@
             btnConcluir.Text = "Concluir";
             btnConcluir.UseVisualStyleBackColor = false;
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.ForeColor = Color.White;
+            label5.Location = new Point(341, 190);
+            label5.Name = "label5";
+            label5.Size = new Size(152, 35);
+            label5.TabIndex = 37;
+            label5.Text = "PRESENTES:";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label6.ForeColor = Color.White;
+            label6.Location = new Point(571, 190);
+            label6.Name = "label6";
+            label6.Size = new Size(143, 35);
+            label6.TabIndex = 38;
+            label6.Text = "AUSENTES:";
+            // 
+            // lblContagemPresentes
+            // 
+            lblContagemPresentes.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblContagemPresentes.ForeColor = Color.White;
+            lblContagemPresentes.Location = new Point(499, 190);
+            lblContagemPresentes.Name = "lblContagemPresentes";
+            lblContagemPresentes.Size = new Size(66, 35);
+            lblContagemPresentes.TabIndex = 39;
+            lblContagemPresentes.Text = "0";
+            lblContagemPresentes.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lblContagemAusentes
+            // 
+            lblContagemAusentes.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblContagemAusentes.ForeColor = Color.White;
+            lblContagemAusentes.Location = new Point(720, 190);
+            lblContagemAusentes.Name = "lblContagemAusentes";
+            lblContagemAusentes.Size = new Size(66, 35);
+            lblContagemAusentes.TabIndex = 40;
+            lblContagemAusentes.Text = "0";
+            lblContagemAusentes.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // frmRelatorio
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Maroon;
             ClientSize = new Size(968, 630);
+            Controls.Add(lblContagemAusentes);
+            Controls.Add(lblContagemPresentes);
+            Controls.Add(label6);
+            Controls.Add(label5);
             Controls.Add(btnConcluir);
             Controls.Add(btnExportar);
-            Controls.Add(lblStatusDigital);
+            Controls.Add(lblStatusAlunos);
             Controls.Add(label4);
             Controls.Add(dgvDadosRegistro);
-            Controls.Add(cmbSemestre);
+            Controls.Add(cmbDataEvento);
             Controls.Add(cmbEvento);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -242,15 +294,19 @@
         private Label label2;
         private Label label3;
         private ComboBox cmbEvento;
-        private ComboBox cmbSemestre;
+        private ComboBox cmbDataEvento;
         private DataGridView dgvDadosRegistro;
         private Label label4;
-        private Label lblStatusDigital;
+        private Label lblStatusAlunos;
         private DataGridViewTextBoxColumn clmName;
         private DataGridViewTextBoxColumn clmSemestre;
         private DataGridViewTextBoxColumn clmMetodo;
         private DataGridViewTextBoxColumn clmPontuacao;
         private Button btnExportar;
         private Button btnConcluir;
+        private Label label5;
+        private Label label6;
+        private Label lblContagemPresentes;
+        private Label lblContagemAusentes;
     }
 }

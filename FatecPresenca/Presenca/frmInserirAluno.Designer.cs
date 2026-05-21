@@ -39,13 +39,12 @@
             btnCancelar = new Button();
             btnCadastrar = new Button();
             btnInserir = new Button();
-            btnExportarDados = new Button();
+            btnImportarDados = new Button();
             btnAlterar = new Button();
             btnDeletar = new Button();
             btnLimpar = new Button();
             txtPesquisar = new TextBox();
             label5 = new Label();
-            btnVerificarDados = new Button();
             label = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvDadosRegistro).BeginInit();
             SuspendLayout();
@@ -116,6 +115,7 @@
             dgvDadosRegistro.Location = new Point(12, 400);
             dgvDadosRegistro.Name = "dgvDadosRegistro";
             dgvDadosRegistro.ReadOnly = true;
+            dgvDadosRegistro.RowHeadersVisible = false;
             dgvDadosRegistro.RowHeadersWidth = 52;
             dgvDadosRegistro.Size = new Size(800, 262);
             dgvDadosRegistro.TabIndex = 31;
@@ -161,11 +161,11 @@
             btnCadastrar.FlatStyle = FlatStyle.Flat;
             btnCadastrar.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             btnCadastrar.ForeColor = Color.Black;
-            btnCadastrar.Location = new Point(672, 692);
+            btnCadastrar.Location = new Point(570, 692);
             btnCadastrar.Name = "btnCadastrar";
-            btnCadastrar.Size = new Size(140, 53);
+            btnCadastrar.Size = new Size(242, 53);
             btnCadastrar.TabIndex = 34;
-            btnCadastrar.Text = "Cadastrar";
+            btnCadastrar.Text = "Cadastrar Alunos";
             btnCadastrar.UseVisualStyleBackColor = false;
             btnCadastrar.Click += btnCadastrar_Click;
             // 
@@ -185,21 +185,21 @@
             btnInserir.UseVisualStyleBackColor = false;
             btnInserir.Click += btnInserir_Click;
             // 
-            // btnExportarDados
+            // btnImportarDados
             // 
-            btnExportarDados.BackColor = Color.White;
-            btnExportarDados.FlatAppearance.BorderColor = Color.Black;
-            btnExportarDados.FlatAppearance.BorderSize = 3;
-            btnExportarDados.FlatStyle = FlatStyle.Flat;
-            btnExportarDados.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            btnExportarDados.ForeColor = Color.Black;
-            btnExportarDados.Location = new Point(623, 12);
-            btnExportarDados.Name = "btnExportarDados";
-            btnExportarDados.Size = new Size(189, 53);
-            btnExportarDados.TabIndex = 36;
-            btnExportarDados.Text = "Exportar Dados";
-            btnExportarDados.UseVisualStyleBackColor = false;
-            btnExportarDados.Click += btnExportarDados_Click;
+            btnImportarDados.BackColor = Color.White;
+            btnImportarDados.FlatAppearance.BorderColor = Color.Black;
+            btnImportarDados.FlatAppearance.BorderSize = 3;
+            btnImportarDados.FlatStyle = FlatStyle.Flat;
+            btnImportarDados.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            btnImportarDados.ForeColor = Color.Black;
+            btnImportarDados.Location = new Point(623, 12);
+            btnImportarDados.Name = "btnImportarDados";
+            btnImportarDados.Size = new Size(189, 53);
+            btnImportarDados.TabIndex = 36;
+            btnImportarDados.Text = "Importar Dados";
+            btnImportarDados.UseVisualStyleBackColor = false;
+            btnImportarDados.Click += btnExportarDados_Click;
             // 
             // btnAlterar
             // 
@@ -273,22 +273,6 @@
             label5.TabIndex = 42;
             label5.Text = "Procurar:";
             // 
-            // btnVerificarDados
-            // 
-            btnVerificarDados.BackColor = Color.White;
-            btnVerificarDados.FlatAppearance.BorderColor = Color.Black;
-            btnVerificarDados.FlatAppearance.BorderSize = 3;
-            btnVerificarDados.FlatStyle = FlatStyle.Flat;
-            btnVerificarDados.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            btnVerificarDados.ForeColor = Color.Black;
-            btnVerificarDados.Location = new Point(472, 692);
-            btnVerificarDados.Name = "btnVerificarDados";
-            btnVerificarDados.Size = new Size(183, 53);
-            btnVerificarDados.TabIndex = 43;
-            btnVerificarDados.Text = "Verificar Dados";
-            btnVerificarDados.UseVisualStyleBackColor = false;
-            btnVerificarDados.Click += btnVerificarDados_Click;
-            // 
             // label
             // 
             label.AutoSize = true;
@@ -307,13 +291,12 @@
             BackColor = Color.Maroon;
             ClientSize = new Size(837, 766);
             Controls.Add(label);
-            Controls.Add(btnVerificarDados);
             Controls.Add(label5);
             Controls.Add(txtPesquisar);
             Controls.Add(btnLimpar);
             Controls.Add(btnDeletar);
             Controls.Add(btnAlterar);
-            Controls.Add(btnExportarDados);
+            Controls.Add(btnImportarDados);
             Controls.Add(btnInserir);
             Controls.Add(btnCadastrar);
             Controls.Add(btnCancelar);
@@ -342,13 +325,12 @@
         private Button btnCancelar;
         private Button btnCadastrar;
         private Button btnInserir;
-        private Button btnExportarDados;
+        private Button btnImportarDados;
         private Button btnAlterar;
         private Button btnDeletar;
         private Button btnLimpar;
         private TextBox txtPesquisar;
         private Label label5;
-        private Button btnVerificarDados;
         private Label label;
         private DataGridViewTextBoxColumn clmName;
         private DataGridViewTextBoxColumn clmEmail;

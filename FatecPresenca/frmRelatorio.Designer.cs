@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -47,6 +47,7 @@
             label6 = new Label();
             lblContagemPresentes = new Label();
             lblContagemAusentes = new Label();
+            txtPesquisar = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgvDadosRegistro).BeginInit();
             SuspendLayout();
             // 
@@ -57,9 +58,9 @@
             label1.ForeColor = Color.White;
             label1.Location = new Point(12, 9);
             label1.Name = "label1";
-            label1.Size = new Size(354, 40);
+            label1.Size = new Size(183, 40);
             label1.TabIndex = 20;
-            label1.Text = "RELATÓRIO GERENCIAL";
+            label1.Text = "RELATÓRIO";
             // 
             // label2
             // 
@@ -114,14 +115,14 @@
             dgvDadosRegistro.AllowUserToResizeColumns = false;
             dgvDadosRegistro.AllowUserToResizeRows = false;
             dgvDadosRegistro.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Control;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgvDadosRegistro.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dgvDadosRegistro.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvDadosRegistro.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvDadosRegistro.Columns.AddRange(new DataGridViewColumn[] { clmName, clmSemestre, clmMetodo, clmPontuacao });
             dgvDadosRegistro.Location = new Point(12, 238);
@@ -259,12 +260,21 @@
             lblContagemAusentes.Text = "0";
             lblContagemAusentes.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // txtPesquisar
+            // 
+            txtPesquisar.Font = new Font("Segoe UI Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            txtPesquisar.Location = new Point(751, 138);
+            txtPesquisar.Name = "txtPesquisar";
+            txtPesquisar.Size = new Size(205, 27);
+            txtPesquisar.TabIndex = 41;
+            // 
             // frmRelatorio
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Maroon;
             ClientSize = new Size(968, 630);
+            Controls.Add(txtPesquisar);
             Controls.Add(lblContagemAusentes);
             Controls.Add(lblContagemPresentes);
             Controls.Add(label6);
@@ -308,5 +318,6 @@
         private Label label6;
         private Label lblContagemPresentes;
         private Label lblContagemAusentes;
+        private TextBox txtPesquisar;
     }
 }

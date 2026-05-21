@@ -12,13 +12,13 @@ using System.Threading.Tasks;
 namespace FatecPresenca.Presenter
 
 {
-    public class EventoDTO
+    public record EventoDTO
     {
         public int id { get; set; }
         public string Nome { get; set; } = string.Empty;
     }
 
-    public class DashboardDTO
+    public record DashboardDTO
     {
         public string NOME { get; set; } = string.Empty;
         public string STATUS { get; set; } = string.Empty;

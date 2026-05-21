@@ -40,6 +40,7 @@ namespace FatecPresenca.Presenter
         private readonly ServicoAluno _servicoAluno;
         private readonly ServicoRegistro _servicoRegistro;
         private Evento _evento;
+        private List<RelatorioDTO> _listaRelatorio;
 
         public RelatorioPresenter(RelatorioView view)
         {
@@ -54,6 +55,7 @@ namespace FatecPresenca.Presenter
             _view.ClicarSair += (_, _) => fecharJanela();
             _view.EventoSelecionado += dataEvento;
             _view.EventoDataSelecionado += mostrarDados;
+            _view.TextoPesquisaAlterado += pesquisarAluno;
         }
 
         private void carregarEvento()
@@ -117,7 +119,19 @@ namespace FatecPresenca.Presenter
             _view.TotalAlunoPresente = dadosStatus.Presentes.ToString();
             _view.TotalAlunoAusente = dadosStatus.Ausente.ToString();
 
+            _listaRelatorio = lista;
             _view.tabelaAlunos(lista);
+        }
+
+        private void pesquisarAluno(object? obj, string texto)
+        {
+            if (_listaRelatorio == null) return;
+
+            var filtrados = string.IsNullOrWhiteSpace(texto)
+                ? _listaRelatorio
+                : _listaRelatorio.Where(r => r.NOME.Contains(texto, StringComparison.OrdinalIgnoreCase)).ToList();
+
+            _view.tabelaAlunos(filtrados);
         }
 
         private void fecharJanela()

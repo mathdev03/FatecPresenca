@@ -35,8 +35,8 @@ namespace FatecPresenca.DAO
                 foreach (var al in alunos)
                 {
                     await using var comando = new MySqlCommand(query, conexao, (MySqlTransaction)transacao);
-                    comando.Parameters.AddWithValue("@aluno", al.getNome());
-                    comando.Parameters.AddWithValue("@email", al.getEmail());
+                    comando.Parameters.AddWithValue("@aluno", al.nome);
+                    comando.Parameters.AddWithValue("@email", al.email);
 
                     totalInseridos += await comando.ExecuteNonQueryAsync();
                 }
@@ -63,9 +63,9 @@ namespace FatecPresenca.DAO
 
                 await using var comando = new MySqlCommand(query, conexao);
 
-                comando.Parameters.AddWithValue("@nome", aluno.getNome());
-                comando.Parameters.AddWithValue("@email", aluno.getEmail());
-                comando.Parameters.AddWithValue("@id", aluno.getId());
+                comando.Parameters.AddWithValue("@nome", aluno.nome);
+                comando.Parameters.AddWithValue("@email", aluno.email);
+                comando.Parameters.AddWithValue("@id", aluno.id);
 
                 int linhasAfetadas = await comando.ExecuteNonQueryAsync();
 
@@ -123,7 +123,7 @@ namespace FatecPresenca.DAO
                     string nome = leitura["AL_nome"]?.ToString();
                     string email = leitura["AL_email"]?.ToString();
 
-                    var aluno = new Aluno(Convert.ToInt32(id), nome, email);
+                    var aluno = new Aluno(nome, email, Convert.ToInt32(id));
 
                     alunos.Add(aluno);
                 }
@@ -153,9 +153,9 @@ namespace FatecPresenca.DAO
                 if (await leitura.ReadAsync())
                 {
                     return new Aluno(
-                        id,
                         leitura.GetString("AL_nome"),
-                        leitura.GetString("AL_email")
+                        leitura.GetString("AL_email"),
+                        id
                         );
                 }
 

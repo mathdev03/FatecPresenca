@@ -1,5 +1,6 @@
 ﻿using FatecPresenca.DAO;
 using FatecPresenca.Models;
+using FatecPresenca.Models.Servico;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +16,7 @@ namespace FatecPresenca.Presenca
 {
     public partial class frmPresenca : Form
     {
-        Turma turma;
+        ServicoInserirAluno turma;
         int linhaSelecionado = -1;
 
         public frmPresenca()
@@ -32,7 +33,7 @@ namespace FatecPresenca.Presenca
 
             AlunoBD db = new AlunoBD();
 
-            turma = new Turma(await db.pegarAlunos());
+            turma = new ServicoInserirAluno(await db.pegarAlunos());
 
             turma.getListaAluno().ForEach(aluno =>
             {

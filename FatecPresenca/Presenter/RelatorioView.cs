@@ -14,6 +14,7 @@ namespace FatecPresenca.Presenter
         event EventHandler<int>? EventoSelecionado;
         event EventHandler<string>? EventoDataSelecionado;
         event EventHandler? ClicarSair;
+        event EventHandler<string>? TextoPesquisaAlterado;
 
 
         string TotalAluno { set; }

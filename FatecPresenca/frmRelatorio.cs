@@ -16,6 +16,7 @@ namespace FatecPresenca
     {
         public event EventHandler? CarregarEvento;
         public event EventHandler? ClicarSair;
+        public event EventHandler<string>? TextoPesquisaAlterado;
         public event EventHandler<int>? EventoSelecionado;
         public event EventHandler<string>? EventoDataSelecionado;
 
@@ -58,6 +59,7 @@ namespace FatecPresenca
                     EventoDataSelecionado?.Invoke(this, dto.data);
                 }
             };
+            txtPesquisar.TextChanged += (_, _) => TextoPesquisaAlterado?.Invoke(this, txtPesquisar.Text);
         }
 
         public void obterEventos(List<RelatorioEventoDTO> dto)

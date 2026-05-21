@@ -1,5 +1,6 @@
 ﻿using FatecPresenca.DAO;
 using FatecPresenca.Models;
+using FatecPresenca.Presenter.Alunos;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,89 +13,80 @@ using System.Windows.Forms;
 
 namespace FatecPresenca.Presenca
 {
-    public partial class frmInserirAluno : Form
+    public partial class frmInserirAluno : Form, InserirAlunoView
     {
-        Turma turma = new Turma(new List<Aluno>());
+        public event EventHandler<DataGridViewCellEventArgs>? SelecionarLinha;
+        public event EventHandler? InserirAluno;
+        public event EventHandler? AlterarAluno;
+        public event EventHandler? DeletarAluno;
+        public event EventHandler? CadastrarAlunos;
+        public event EventHandler? ImportarExcel;
+        public event EventHandler? LimparCampos;
+        public event EventHandler? Cancelar;
+        public event EventHandler<string>? PesquisarAluno;
 
-        Aluno alunoEscolhido;
-        int identLinha;
+        private readonly InserirAlunoPresenter _presenter;
+
+        public string Nome
+        {
+            get => txtNome.Text;
+            set => txtNome.Text = value;
+        }
+
+        public string Email
+        {
+            get => txtEmail.Text;
+            set => txtEmail.Text = value;
+        }
+
+        public int LinhaSelecionada { get; private set; }
 
         public frmInserirAluno()
         {
 
             InitializeComponent();
+
+            _presenter = new InserirAlunoPresenter(this);
+
+            btnInserir.Click += (_, _) => InserirAluno?.Invoke(this, EventArgs.Empty);
+            btnAlterar.Click += (_, _) => AlterarAluno?.Invoke(this, EventArgs.Empty);
+            btnDeletar.Click += (_, _) => DeletarAluno?.Invoke(this, EventArgs.Empty);
+            btnCadastrar.Click += (_, _) => CadastrarAlunos?.Invoke(this, EventArgs.Empty);
+            btnImportarDados.Click += (_, _) => ImportarExcel?.Invoke(this, EventArgs.Empty);
+            btnLimpar.Click += (_, _) => LimparCampos?.Invoke(this, EventArgs.Empty);
+            btnCancelar.Click += (_, _) => Cancelar?.Invoke(this, EventArgs.Empty);
+            txtPesquisar.TextChanged += (_, _) => PesquisarAluno?.Invoke(this, txtPesquisar.Text);
+
+            dgvDadosRegistro.CellClick += (_, e) => SelecionarLinha?.Invoke(this, e);
         }
 
-        private void recarregarLista()
+        public string ObterNomeLinha(int linha)
+        {
+            return dgvDadosRegistro.Rows[linha].Cells[0].Value?.ToString();
+        }
+
+        public string ObterEmailLinha(int linha)
+        {
+            return dgvDadosRegistro.Rows[linha].Cells[1].Value?.ToString();
+        }
+
+        public void LimparGrid()
         {
             dgvDadosRegistro.Rows.Clear();
-
-            turma.getListaAluno().ForEach(al =>
-            {
-                DataGridViewRow linhas = new DataGridViewRow();
-                linhas.CreateCells(dgvDadosRegistro);
-                linhas.Cells[0].Value = al.getNome();
-                linhas.Cells[1].Value = al.getEmail();
-                dgvDadosRegistro.Rows.Add(linhas);
-            });
         }
 
-
-        // Dados forms
-
-        private void btnCancelar_Click(object sender, EventArgs e)
+        public void AdicionarLinha(string nome, string email)
         {
-            this.Close();
+            DataGridViewRow linhas = new DataGridViewRow();
+            linhas.CreateCells(dgvDadosRegistro);
+            linhas.Cells[0].Value = nome;
+            linhas.Cells[1].Value = email;
+            dgvDadosRegistro.Rows.Add(linhas);
         }
 
-        private void btnInserir_Click(object sender, EventArgs e)
+        public void FiltrarAlunos(string termo)
         {
-            string nome = txtNome.Text.ToUpper();
-            string email = txtEmail.Text;
-
-            var aluno = new Aluno(nome, email);
-            turma.adicionarAluno(aluno);
-
-            recarregarLista();
-        }
-
-        private void btnAlterar_Click(object sender, EventArgs e)
-        {
-            string nome = txtNome.Text.ToUpper();
-            string email = txtEmail.Text;
-
-            var aluno = new Aluno(nome, email);
-
-            alunoEscolhido = turma.alterarAluno(alunoEscolhido, aluno);
-
-            recarregarLista();
-        }
-
-        private void dgvDadosRegistro_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex == -1) return;
-
-            //Identificar aluno
-            identLinha = e.RowIndex;
-            DataGridViewRow linha = dgvDadosRegistro?.Rows[identLinha];
-            string email = linha.Cells[1].Value?.ToString();
-            string nome = linha.Cells[0].Value?.ToString();
-
-            alunoEscolhido = new Aluno(nome, email);
-
-            txtNome.Text = nome;
-            txtEmail.Text = email;
-        }
-
-        private void btnLimpar_Click(object sender, EventArgs e)
-        {
-            txtNome.Text = "";
-            txtEmail.Text = "";
-        }
-
-        private void txtPesquisar_TextChanged(object sender, EventArgs e)
-        {
-            string pesquisa = txtPesquisar.Text.ToLower();
+            var pesquisa = termo.ToLower();
 
             foreach (DataGridViewRow linha in dgvDadosRegistro.Rows)
             {
@@ -114,37 +106,27 @@ namespace FatecPresenca.Presenca
             }
         }
 
-        private void btnDeletar_Click(object sender, EventArgs e)
+        public void MostrarMensagem(string mensagem)
         {
-            turma.removerAluno(alunoEscolhido);
-
-            alunoEscolhido = null;
-            btnLimpar_Click(null, null);
-            recarregarLista();
+            MessageBox.Show(mensagem, "Mensagem");
         }
 
-        private async void btnCadastrar_Click(object sender, EventArgs e)
+        public void Fechar()
         {
-            AlunoBD db = new AlunoBD();
-
-            int dados = await db.iserirAluno(turma.getListaAluno());
-
-            MessageBox.Show(dados.ToString(), "Total de Alunos Inseridos!");
             this.Close();
         }
 
-        private void btnVerificarDados_Click(object sender, EventArgs e)
-        {
-            turma.verificarDuplicatas();
 
-            recarregarLista();
-        }
 
-        private void btnExportarDados_Click(object sender, EventArgs e)
-        {
-            turma.ImportarAlunosDoExcel();
-
-            recarregarLista();
-        }
+        private void btnCancelar_Click(object sender, EventArgs e) { }
+        private void btnInserir_Click(object sender, EventArgs e) { }
+        private void btnAlterar_Click(object sender, EventArgs e) { }
+        private void dgvDadosRegistro_CellClick(object sender, DataGridViewCellEventArgs e) { }
+        private void btnLimpar_Click(object sender, EventArgs e) { }
+        private void txtPesquisar_TextChanged(object sender, EventArgs e) { }
+        private void btnDeletar_Click(object sender, EventArgs e) { }
+        private void btnCadastrar_Click(object sender, EventArgs e) { }
+        private void btnVerificarDados_Click(object sender, EventArgs e) { }
+        private void btnExportarDados_Click(object sender, EventArgs e) { }
     }
 }

@@ -10,18 +10,20 @@ namespace FatecPresenca.Models
 {
     internal class Aluno
     {
-        private int id;
-        private string nome;
-        private string email;
+        public int id { get; }
+        public string nome { get; }
+        public string email { get; }
 
         // Cadastro
-        public Aluno(string nome, string email)
+        public Aluno(string nome, string email, int id = 0)
         {
-            if (!verificarEmail(email)) {
-                MessageBox.Show("Email inválido!", "Aviso!");
-                return;
-            }
+            if (!verificarCampoVazio(nome, email))
+                throw new ArgumentException("Campos Vazios!");
 
+            if (!verificarEmail(email))
+                throw new ArgumentException("Email inválido!");
+
+            this.id = id;
             this.nome = nome;
             this.email = email;
         }
@@ -32,6 +34,16 @@ namespace FatecPresenca.Models
             this.id = id;
             this.nome = nome;
             this.email = email;
+        }
+
+
+        private bool verificarCampoVazio(string nome, string email)
+        {
+            if (string.IsNullOrWhiteSpace(nome) ||
+                string.IsNullOrEmpty(email))
+                return false;
+
+            return true;
         }
 
         private bool verificarEmail(string email) {

@@ -13,14 +13,12 @@ namespace FatecPresenca.Presenter.Alunos
     internal class InserirAlunoPresenter
     {
         private readonly InserirAlunoView _view;
-        private readonly AlunoBD _alunoBD;
         private readonly ServicoAluno _servicoAluno;
         private ServicoInserirAluno _turma;
 
         public InserirAlunoPresenter(InserirAlunoView view)
         {
             _view = view;
-            _alunoBD = new AlunoBD();
             _turma = new ServicoInserirAluno(new List<Aluno>());
             _servicoAluno = new ServicoAluno();
 
@@ -60,7 +58,7 @@ namespace FatecPresenca.Presenter.Alunos
                 LimparCampos();
 
                 _view.LimparGrid();
-                _turma.getListaAluno().ForEach(al => _view.AdicionarLinha(al.getNome(), al.getEmail()));
+                _turma.getListaAluno().ForEach(al => _view.AdicionarLinha(al.nome, al.email));
             }
             catch (ArgumentException arg)
             {
@@ -80,7 +78,7 @@ namespace FatecPresenca.Presenter.Alunos
                 _turma.alterarAluno(aluno);
 
                 _view.LimparGrid();
-                _turma.getListaAluno().ForEach(al => _view.AdicionarLinha(al.getNome(), al.getEmail()));
+                _turma.getListaAluno().ForEach(al => _view.AdicionarLinha(al.nome, al.email));
             }
             catch (ArgumentException arg)
             {
@@ -99,7 +97,7 @@ namespace FatecPresenca.Presenter.Alunos
                 LimparCampos();
 
                 _view.LimparGrid();
-                _turma.getListaAluno().ForEach(al => _view.AdicionarLinha(al.getNome(), al.getEmail()));
+                _turma.getListaAluno().ForEach(al => _view.AdicionarLinha(al.nome, al.email));
             }
             catch (ArgumentException arg)
             {
@@ -126,7 +124,7 @@ namespace FatecPresenca.Presenter.Alunos
             _turma.ImportarAlunosDoExcel();
 
             _view.LimparGrid();
-            _turma.getListaAluno().ForEach(al => _view.AdicionarLinha(al.getNome(), al.getEmail()));
+            _turma.getListaAluno().ForEach(al => _view.AdicionarLinha(al.nome, al.email));
         }
 
         private void LimparCampos()

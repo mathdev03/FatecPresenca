@@ -129,7 +129,7 @@ namespace FatecPresenca.Presenter
 
         private void AbrirPresenca()
         {
-            var frm = new frmPresenca();
+            var frm = new frmAlunos();
             frm.ShowDialog();
 
             CarregarEventos();

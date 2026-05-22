@@ -28,15 +28,6 @@ namespace FatecPresenca.Models
             this.email = email;
         }
 
-        // Identificação/Alteração/Exclusão
-        public Aluno(int id, string nome, string email)
-        {
-            this.id = id;
-            this.nome = nome;
-            this.email = email;
-        }
-
-
         private bool verificarCampoVazio(string nome, string email)
         {
             if (string.IsNullOrWhiteSpace(nome) ||
@@ -52,17 +43,5 @@ namespace FatecPresenca.Models
             string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
             return Regex.IsMatch(email, pattern, RegexOptions.IgnoreCase);
         }
-
-        public string getNome()
-        {
-            return nome;
-        }
-
-        public string getEmail()
-        {
-            return email;
-        }
-
-        public int getId() { return id; }
     }
 }

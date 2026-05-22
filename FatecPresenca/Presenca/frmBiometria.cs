@@ -65,7 +65,7 @@ namespace FatecPresenca.Presenca
 
             aluno = await db.buscarAluno(id);
 
-            lblNomeAluno.Text = aluno.getNome();
+            lblNomeAluno.Text = aluno.nome;
         }
 
         private void btnConcluir_Click(object sender, EventArgs e)
@@ -110,7 +110,7 @@ namespace FatecPresenca.Presenca
             }
             else
             {
-                if (captura.pegar(aluno.getId(), finger)) return;
+                if (captura.pegar(aluno.id, finger)) return;
             }
 
             lblQualidadeUm.Text = $"{captura.getQualidade()}%";
@@ -130,7 +130,7 @@ namespace FatecPresenca.Presenca
             }
             else
             {
-                if (captura.pegar(aluno.getId(), finger)) return;
+                if (captura.pegar(aluno.id, finger)) return;
             }
 
             lblQualidadeDois.Text = $"{captura.getQualidade()}%";
@@ -150,7 +150,7 @@ namespace FatecPresenca.Presenca
             }
             else
             {
-                if (captura.pegar(aluno.getId(), finger)) return;
+                if (captura.pegar(aluno.id, finger)) return;
             }
 
             lblQualidadeTres.Text = $"{captura.getQualidade()}%";

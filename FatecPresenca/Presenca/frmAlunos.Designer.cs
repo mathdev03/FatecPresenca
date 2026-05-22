@@ -1,6 +1,6 @@
 ﻿namespace FatecPresenca.Presenca
 {
-    partial class frmPresenca
+    partial class frmAlunos
     {
         /// <summary>
         /// Required designer variable.
@@ -33,13 +33,14 @@
             clmName = new DataGridViewTextBoxColumn();
             cmlEmail = new DataGridViewTextBoxColumn();
             btnInserir = new Button();
-            btnAlterar = new Button();
-            btnExcluir = new Button();
+            btnUpdateDelete = new Button();
             btnBiometria = new Button();
             btnConcluir = new Button();
             txtPesquisar = new TextBox();
             label7 = new Label();
             label = new Label();
+            lblNome = new Label();
+            lblEmail = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvDadosRegistro).BeginInit();
             SuspendLayout();
             // 
@@ -92,7 +93,7 @@
             btnInserir.FlatStyle = FlatStyle.Flat;
             btnInserir.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             btnInserir.ForeColor = Color.Black;
-            btnInserir.Location = new Point(33, 200);
+            btnInserir.Location = new Point(32, 648);
             btnInserir.Name = "btnInserir";
             btnInserir.Size = new Size(209, 53);
             btnInserir.TabIndex = 29;
@@ -100,37 +101,21 @@
             btnInserir.UseVisualStyleBackColor = false;
             btnInserir.Click += btnInserir_Click;
             // 
-            // btnAlterar
+            // btnUpdateDelete
             // 
-            btnAlterar.BackColor = Color.White;
-            btnAlterar.FlatAppearance.BorderColor = Color.Black;
-            btnAlterar.FlatAppearance.BorderSize = 3;
-            btnAlterar.FlatStyle = FlatStyle.Flat;
-            btnAlterar.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            btnAlterar.ForeColor = Color.Black;
-            btnAlterar.Location = new Point(33, 141);
-            btnAlterar.Name = "btnAlterar";
-            btnAlterar.Size = new Size(209, 53);
-            btnAlterar.TabIndex = 28;
-            btnAlterar.Text = "Alterar";
-            btnAlterar.UseVisualStyleBackColor = false;
-            btnAlterar.Click += btnAlterar_Click;
-            // 
-            // btnExcluir
-            // 
-            btnExcluir.BackColor = Color.White;
-            btnExcluir.FlatAppearance.BorderColor = Color.Black;
-            btnExcluir.FlatAppearance.BorderSize = 3;
-            btnExcluir.FlatStyle = FlatStyle.Flat;
-            btnExcluir.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            btnExcluir.ForeColor = Color.Black;
-            btnExcluir.Location = new Point(33, 82);
-            btnExcluir.Name = "btnExcluir";
-            btnExcluir.Size = new Size(209, 53);
-            btnExcluir.TabIndex = 27;
-            btnExcluir.Text = "Excluir";
-            btnExcluir.UseVisualStyleBackColor = false;
-            btnExcluir.Click += btnExcluir_Click;
+            btnUpdateDelete.BackColor = Color.White;
+            btnUpdateDelete.FlatAppearance.BorderColor = Color.Black;
+            btnUpdateDelete.FlatAppearance.BorderSize = 3;
+            btnUpdateDelete.FlatStyle = FlatStyle.Flat;
+            btnUpdateDelete.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            btnUpdateDelete.ForeColor = Color.Black;
+            btnUpdateDelete.Location = new Point(247, 648);
+            btnUpdateDelete.Name = "btnUpdateDelete";
+            btnUpdateDelete.Size = new Size(209, 53);
+            btnUpdateDelete.TabIndex = 28;
+            btnUpdateDelete.Text = "Alterar/Excluir";
+            btnUpdateDelete.UseVisualStyleBackColor = false;
+            btnUpdateDelete.Click += btnAlterar_Click;
             // 
             // btnBiometria
             // 
@@ -199,12 +184,36 @@
             label.TabIndex = 40;
             label.Text = "GESTÃO DE ALUNOS";
             // 
-            // frmPresenca
+            // lblNome
+            // 
+            lblNome.AutoSize = true;
+            lblNome.Font = new Font("Segoe UI Black", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblNome.ForeColor = Color.White;
+            lblNome.Location = new Point(33, 132);
+            lblNome.Name = "lblNome";
+            lblNome.Size = new Size(112, 41);
+            lblNome.TabIndex = 41;
+            lblNome.Text = "NOME";
+            // 
+            // lblEmail
+            // 
+            lblEmail.AutoSize = true;
+            lblEmail.Font = new Font("Segoe UI Black", 13F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblEmail.ForeColor = Color.White;
+            lblEmail.Location = new Point(33, 173);
+            lblEmail.Name = "lblEmail";
+            lblEmail.Size = new Size(84, 30);
+            lblEmail.TabIndex = 42;
+            lblEmail.Text = "EMAIL";
+            // 
+            // frmAlunos
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Maroon;
             ClientSize = new Size(1035, 713);
+            Controls.Add(lblEmail);
+            Controls.Add(lblNome);
             Controls.Add(label);
             Controls.Add(label7);
             Controls.Add(txtPesquisar);
@@ -212,11 +221,10 @@
             Controls.Add(btnBiometria);
             Controls.Add(dgvDadosRegistro);
             Controls.Add(btnInserir);
-            Controls.Add(btnAlterar);
-            Controls.Add(btnExcluir);
+            Controls.Add(btnUpdateDelete);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
-            Name = "frmPresenca";
+            Name = "frmAlunos";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FATEC PRESENÇA";
             ((System.ComponentModel.ISupportInitialize)dgvDadosRegistro).EndInit();
@@ -228,8 +236,7 @@
 
         private DataGridView dgvDadosRegistro;
         private Button btnInserir;
-        private Button btnAlterar;
-        private Button btnExcluir;
+        private Button btnUpdateDelete;
         private Button btnBiometria;
         private Button btnConcluir;
         private TextBox txtPesquisar;
@@ -237,5 +244,7 @@
         private Label label;
         private DataGridViewTextBoxColumn clmName;
         private DataGridViewTextBoxColumn cmlEmail;
+        private Label lblNome;
+        private Label lblEmail;
     }
 }

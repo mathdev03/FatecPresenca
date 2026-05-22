@@ -63,11 +63,11 @@ namespace FatecPresenca.Presenter
                     _cts.Token.ThrowIfCancellationRequested();
 
                     // Registrar aluno
-                    bool registro = _serviceRegistro.resgitrarPassagem(aluno.getId(), _view.idEvento, 
+                    bool registro = _serviceRegistro.resgitrarPassagem(aluno.id, _view.idEvento, 
                         TimeOnly.FromDateTime(agora));
 
                     // Mostrar na tela
-                    _view.MostrarNome(aluno.getNome());
+                    _view.MostrarNome(aluno.nome);
                     _view.MensagemStatus(true, $"REGISTRO SUCESSO: {agora.ToString("HH:mm:ss")}");
 
                     // Atualizar a lista

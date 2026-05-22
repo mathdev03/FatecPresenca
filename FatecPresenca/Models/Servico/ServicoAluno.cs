@@ -12,6 +12,7 @@ namespace FatecPresenca.Models.Servico
     internal class ServicoAluno
     {
         private readonly AlunoBD _alunobd;
+        public Aluno _aluno;
 
         public ServicoAluno() { 
             _alunobd = new AlunoBD();
@@ -30,6 +31,25 @@ namespace FatecPresenca.Models.Servico
             return dados;
         }
 
+        public async Task<List<Aluno>> listarAlunos()
+        {
+            var alunos = await _alunobd.pegarAlunos();
+            if (alunos.Count <= 0)
+                throw new ArgumentException("Não há alunos!");
+
+            return alunos;
+        }
+
+        public async Task carregarAluno(int id)
+        {
+            if (id < 0)
+                throw new ArgumentException("Id inválido!");
+
+            var aluno = await _alunobd.buscarAluno(id);
+
+            _aluno = aluno;
+        }
+
         public async Task<string> CadastrarAlunos(List<Aluno> alunos)
         {
             // Verificar duplicatas no BD
@@ -43,6 +63,31 @@ namespace FatecPresenca.Models.Servico
                 throw new ArgumentException("Erro ao inserir no banco!");
 
             return "Dados inseridos com sucesso!";
+        }
+
+        public async Task<string> AtualizarAluno(string nome, string email)
+        {
+            if (_aluno.nome == nome && _aluno.email == email)
+                throw new ArgumentException("Mude os dados de alteração");
+
+            Aluno aluno = new Aluno(nome, email, _aluno.id);
+
+            bool sucesso = await _alunobd.alterarAluno(aluno);
+
+            if (!sucesso)
+                throw new ArgumentException("Aluno não Alterado!");
+
+            return "Aluno Alterado com Sucesso!";
+        }
+
+        public async Task<string> excluirAluno()
+        {
+            bool sucesso = await _alunobd.deletarAluno(_aluno.id);
+
+            if (!sucesso)
+                throw new ArgumentException("Aluno não Excluido!");
+
+            return "Aluno Excluido com Sucesso!";
         }
 
         private async Task<List<Aluno>> verificarDuplicatas(List<Aluno> alunos)
